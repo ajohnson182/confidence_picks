@@ -19,7 +19,7 @@ function App() {
   // }
 
   const [teams, setTeams] = useState(Array(14).fill({ name: '', score: null }));
-  const [allUsersData, setAllUsersData] = useState([]);
+  // const [allUsersData, setAllUsersData] = useState([]);
 
     const updateSelection = (index, name, score) => {
     const newTeams = [...teams];
