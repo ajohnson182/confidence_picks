@@ -9,10 +9,10 @@ and "delete" any "Todo" records.
 const schema = a.schema({
   Pick: a
     .model({
-      team: a.string(),
+      team: a.string().required(),
       confidence_score: a.integer(),
       user_id: a.id().required(),
-      league_id: a.id()
+      league_id: a.id().required(),
       // league: a.belongsTo("League", "league_id")
     }).identifier(["user_id","league_id","team"]),
   // League: a
