@@ -13,7 +13,7 @@ const schema = a.schema({
       confidence_score: a.integer(),
       user_id: a.id().required(),
       league_id: a.id().required(),
-      // league: a.belongsTo("League", "league_id")
+      league: a.belongsTo("League", "league_id")
     }).identifier(["user_id","league_id","team"]),
   League: a
     .model({
