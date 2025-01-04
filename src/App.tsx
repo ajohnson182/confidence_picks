@@ -1,6 +1,7 @@
 // import { useEffect, useState } from "react";
-// import type { Schema } from "../amplify/data/resource";
-// import { generateClient } from "aws-amplify/data";
+import type { Schema } from "../amplify/data/resource";
+import { generateClient } from "aws-amplify/data";
+// import { getCurrentUser } from 'aws-amplify/auth';
 import {
   Card,
   Image,
@@ -10,10 +11,11 @@ import {
   useAuthenticator
 } from '@aws-amplify/ui-react';
 
-// const client = generateClient<Schema>();
+const client = generateClient<Schema>();
 
 function App() {
   const { user, signOut } = useAuthenticator();
+  
   const teams =
     [
         {
@@ -143,6 +145,29 @@ function App() {
             "score": null
         }
     ]
+  // const [picks2, setPicks2] = useState<Array<Schema["Pick"]["type"]>>([]);
+
+  // useEffect(() => {
+  //   client.models.Pick.observeQuery().subscribe({
+  //     next: (data) => setTodos([...data.items]),
+  //   });
+  // }, []);
+
+  function createPicks(picks:any) {
+    let user_id = "blank";
+    if(user !== undefined && user.signInDetails !== undefined && user.signInDetails.loginId !== undefined) {
+      user_id = user.signInDetails.loginId;
+    }
+    for(let i=0; i<picks.length; i++) { 
+      client.models.Pick.create({ 
+        team: picks[i].nickname,
+        confidence_score: picks[i].score,
+        user_id: user_id,
+        league_id: "1"
+      });
+    }
+  }
+
   let picks = JSON.parse(JSON.stringify(teams));
   // const [allUsersData, setAllUsersData] = useState([]);
 
@@ -207,7 +232,7 @@ function App() {
       alert(`Please make sure you have only used each confidence score once.`);
     }
       
-    console.log(picks);
+    createPicks(picks);
   };
 
   // const saveSelections = async () => {
