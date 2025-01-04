@@ -15,12 +15,12 @@ const schema = a.schema({
       league_id: a.id().required(),
       // league: a.belongsTo("League", "league_id")
     }).identifier(["user_id","league_id","team"]),
-  // League: a
-  //   .model({
-  //     league_id:  a.id().required(),
-  //     name: a.string(),
-  //     picks: a.hasMany("Pick", "league_id")
-  //   }).identifier(["league_id"])
+  League: a
+    .model({
+      league_id:  a.id().required(),
+      name: a.string(),
+      picks: a.hasMany("Pick", "league_id")
+    }).identifier(["league_id"])
   // UserLeagues: a
   //   .model({
   //     user_id:  a.id().required(),
