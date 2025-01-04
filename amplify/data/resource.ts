@@ -26,14 +26,14 @@ const schema = a.schema({
   //     user_id:  a.id().required(),
   //     leagues: a.hasMany("League", "league_id")
   //   }).identifier(["user_id"])
-}).authorization((allow) => [allow.guest()]);
+}).authorization((allow) => [allow.owner()])
 
 export type Schema = ClientSchema<typeof schema>;
 
 export const data = defineData({
   schema,
   authorizationModes: {
-    defaultAuthorizationMode: 'iam',
+    defaultAuthorizationMode: 'userPool',
   },
 });
 

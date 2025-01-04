@@ -189,10 +189,11 @@ function App() {
 
     if (!isNaN(selectedScore) && selectedScore > 0 && selectedScore < 15) {
       console.log(selectedScore);
-    } else { 
-      alert(`Please choose a valid confidence score (1-14).`);
-      event.currentTarget.value = '';
-    }
+    } 
+    // else { 
+    //   alert(`Please choose a valid confidence score (1-14).`);
+    //   event.currentTarget.value = '';
+    // }
     for(let i=0; i<teams.length; i++) { 
       let el:any = document.getElementById(teams[i].team_id);  
       { 
@@ -219,6 +220,11 @@ function App() {
 
   const validateScores = () => {
     let scores = [];
+    for(let i=0; i<teams.length; i++) { 
+      let el:any = document.getElementById(teams[i].team_id);
+      let val:any = el!.value;
+      picks[i].score = val;
+    }
     for(let i=0; i<picks.length; i++) { 
       const selectedScore = parseInt(picks[i].score);
       if (!isNaN(selectedScore) && selectedScore > 0 && selectedScore < 15) {
@@ -294,7 +300,7 @@ function App() {
                   {team.nickname}
                 </Text>
                 <Flex>
-                  <Input id={team.team_id} placeholder={String(14-index)} name="confidence" onChange={validateScore}/>
+                  <Input id={team.team_id} value={String(14-index)} placeholder={String(14-index)} name="confidence" onChange={validateScore}/>
                 </Flex>
               </Flex>
             </Flex>
