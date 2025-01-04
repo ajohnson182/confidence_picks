@@ -227,9 +227,11 @@ function App() {
     }
     if(scores.length != 14){
       alert(`Please make sure your have scored all 14 teams.`);
+      return
     } 
     if (scores.filter((value, index, array) => array.indexOf(value) === index).length != 14) {
       alert(`Please make sure you have only used each confidence score once.`);
+      return
     }
       
     createPicks(picks);
