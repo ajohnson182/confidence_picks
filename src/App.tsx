@@ -238,11 +238,11 @@ function App() {
         <h2> Confidence Pick'em </h2> 
         <ul>
           <li id="listheader">Rules</li> 
-          <li>Assign all 14 playoff teams a confidence score of 1-14.</li> 
+          <li>Assign all 14 playoff teams a confidence score of 1-{teams.length}.</li> 
           <li>You can only use each confidence rating once.</li> 
           <li>Each time a team wins, you get the number of points you assigned.</li> 
-          <li>Whoever has most points after Super Bowl wins.</li>
-          <li>#1 Seeds with byes do not score until the win a game.</li>
+          <li>Whoever has most points after the Super Bowl wins.</li>
+          <li>Teams with byes do not score until they win a game.</li>
         </ul>
       </div>
       <Flex
