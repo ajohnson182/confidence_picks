@@ -13,9 +13,10 @@ import {
 
 const client = generateClient<Schema>();
 
+
 function App() {
   const { user, signOut } = useAuthenticator();
-  
+
   const teams =
     [
         {
@@ -165,6 +166,12 @@ function App() {
         user_id: user_id,
         league_id: "1"
       });
+      client.models.Pick.update({ 
+        team: picks[i].nickname,
+        confidence_score: picks[i].score,
+        user_id: user_id,
+        league_id: "1"
+      });
     }
   }
 
@@ -300,7 +307,7 @@ function App() {
                   {team.nickname}
                 </Text>
                 <Flex>
-                  <Input id={team.team_id} value={String(14-index)} placeholder={String(14-index)} name="confidence" onChange={validateScore}/>
+                  <Input id={team.team_id} placeholder={String(14-index)} name="confidence" onChange={validateScore}/>
                 </Flex>
               </Flex>
             </Flex>
