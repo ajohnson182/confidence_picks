@@ -11,8 +11,7 @@ const schema = a.schema({
     .model({
       user_id: a.id().required(),
       name: a.string(),
-      league_id: a.id(),
-      leagues: a.belongsTo("League", "league_id")
+      leagues: a.hasMany("UserLeagues", "user_id")
     }).identifier(["user_id"]),
   Pick: a
     .model({
@@ -27,8 +26,15 @@ const schema = a.schema({
       league_id:  a.id().required(),
       name: a.string(),
       picks: a.hasMany("Pick", "league_id"),
-      users: a.hasMany("User", "league_id")
-    }).identifier(["league_id"])
+      users: a.hasMany("UserLeagues", "league_id")
+    }).identifier(["league_id"]),
+  UserLeagues: a 
+    .model({
+      league_id: a.id().required(),
+      user_id: a.id().required(),
+      league: a.belongsTo("League", "league_id"),
+      user: a.belongsTo("User", "user_id"),
+    }).identifier(["league_id","user_id"]),
   // UserLeagues: a
   //   .model({
   //     user_id:  a.id().required(),
