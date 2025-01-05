@@ -7,6 +7,13 @@ specifies that any unauthenticated user can "create", "read", "update",
 and "delete" any "Todo" records.
 =========================================================================*/
 const schema = a.schema({
+  User: a 
+    .model({
+      user_id: a.id().required(),
+      name: a.string(),
+      // league_id: a.id(),
+      leagues: a.hasMany("League", "league_id")
+    }).identifier(["user_id"]),
   Pick: a
     .model({
       team: a.string().required(),
@@ -19,7 +26,8 @@ const schema = a.schema({
     .model({
       league_id:  a.id().required(),
       name: a.string(),
-      picks: a.hasMany("Pick", "league_id")
+      picks: a.hasMany("Pick", "league_id"),
+      users: a.belongsTo("User", "league_id")
     }).identifier(["league_id"])
   // UserLeagues: a
   //   .model({
