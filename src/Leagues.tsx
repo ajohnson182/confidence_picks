@@ -55,7 +55,8 @@ export default function Leagues() {
           // create a new League with the following attributes
           const { errors, data: newLeague } = await client.models.League.create({
             league_id: formState.league_id,
-            name: formState.name
+            name: formState.name,
+            contest_id: "nfl_playoff_24-25"
           });
           console.log(errors, newLeague);
         }}>Create </button>
