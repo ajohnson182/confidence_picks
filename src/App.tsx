@@ -1,6 +1,7 @@
 // import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
+// import HomePage from "HomePage"
 // import { getCurrentUser } from 'aws-amplify/auth';
 import {
   Card,
@@ -20,130 +21,130 @@ function App() {
   const teams =
     [
         {
-            "location": "Kansas City",
-            "nickname": "Chiefs",
+            "name": "Kansas City Chiefs",
             "seed": 1,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ujshjqvmnxce8m4obmvs",
             "conference": "AFC",
             "team_id": "afc1",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Buffalo",
-            "nickname": "Bills",
+            "name": "Buffalo Bills",
             "seed": 2,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/giphcy6ie9mxbnldntsf",
             "conference": "AFC",
             "team_id": "afc2",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Baltimore",
-            "nickname": "Ravens",
+            "name": "Baltimore Ravens",
             "seed": 3,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ucsdijmddsqcj1i9tddd",
             "conference": "AFC",
             "team_id": "afc3",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Houson",
-            "nickname": "Texans",
+            "name": "Houson Texans",
             "seed": 4,
             "logo_ref": "https://static.www.nfl.com/image/upload/f_auto/league/u6camnphqvjc6mku6u3c",
             "conference": "AFC",
             "team_id": "afc4",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Pittsburgh",
-            "nickname": "Steelers",
+            "name": "Pittsburgh Steelers",
             "seed": 5,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/xujg9t3t4u5nmjgr54wx",
             "conference": "AFC",
             "team_id": "afc5",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Los Angeles",
-            "nickname": "Chargers",
+            "name": "Los Angeles Chargers",
             "seed": 6,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/dhfidtn8jrumakbogeu4",
             "conference": "AFC",
             "team_id": "afc6",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Denver",
-            "nickname": "Broncos",
+            "name": "Denver Broncos",
             "seed": 7,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/t0p7m5cjdjy18rnzzqbx",
             "conference": "AFC",
             "team_id": "afc7",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Detroit",
-            "nickname": "Lions",
+            "name": "Detroit Lions",
             "seed": 1,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ocvxwnapdvwevupe4tpr",
             "conference": "NFC",
             "team_id": "nfc1",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Philidelphia",
-            "nickname": "Eagles",
+            "name": "Philidelphia Eagles",
             "seed": 2,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/puhrqgj71gobgdkdo6uq",
             "conference": "NFC",
             "team_id": "nfc2",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Los Angeles",
-            "nickname": "Rams",
+            "name": "Tampa Bay Buccaneers",
             "seed": 3,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ayvwcmluj2ohkdlbiegi",
-            "conference": "NFC",
-            "team_id": "nfc3",
-            "score": null
-        },
-        {
-            "location": "Tampa Bay",
-            "nickname": "Buccaneers",
-            "seed": 4,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/v8uqiualryypwqgvwcih",
             "conference": "NFC",
-            "team_id": "nfc4",
-            "score": null
+            "team_id": "nfc3",
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Minnesota",
-            "nickname": "Vikings",
+            "name": "Los Angeles Rams",
+            "seed": 4,
+            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ayvwcmluj2ohkdlbiegi",
+            "conference": "NFC",
+            "team_id": "nfc4",
+            "score": null,
+            "contest":"nfl_playoff_24-25"
+        },
+        {
+            "name": "Minnesota Vikings",
             "seed": 5,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/teguylrnqqmfcwxvcmmz",
             "conference": "NFC",
             "team_id": "nfc5",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Washington",
-            "nickname": "Commanders",
+            "name": "Washington Commanders",
             "seed": 6,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/xymxwrxtyj9fhaemhdyd",
             "conference": "NFC",
             "team_id": "nfc6",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         },
         {
-            "location": "Green Bay",
-            "nickname": "Packers",
+            "name": "Green Bay Packers",
             "seed": 7,
             "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/gppfvr7n8gljgjaqux2x",
             "conference": "NFC",
             "team_id": "nfc7",
-            "score": null
+            "score": null,
+            "contest":"nfl_playoff_24-25"
         }
     ]
   // const [picks2, setPicks2] = useState<Array<Schema["Pick"]["type"]>>([]);
@@ -295,16 +296,13 @@ function App() {
       >
       {teams.map((team, index) => (
       
-          <Card variation="elevated" key={team.nickname}>
+          <Card variation="elevated" key={team.name}>
             <Flex alignItems="flex-start">
               <Image src={team.logo_ref}
                 alt="Amplify" width="6rem"/>
               <Flex direction="column" gap="0">       
-                <Text fontSize="large" fontWeight="font.tertiary">
-                  {team.location}
-                </Text>
                 <Text fontSize="large" fontWeight="semibold">
-                  {team.nickname}
+                  {team.name}
                 </Text>
                 <Flex>
                   <Input id={team.team_id} placeholder={String(14-index)} name="confidence" onChange={validateScore}/>

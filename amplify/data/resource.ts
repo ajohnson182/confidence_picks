@@ -35,6 +35,23 @@ const schema = a.schema({
       league: a.belongsTo("League", "league_id"),
       user: a.belongsTo("User", "user_id"),
     }).identifier(["league_id","user_id"]),
+  Contest: a
+    .model({
+      contest_id: a.id().required(),
+      name: a.string(),
+      teams: a.hasMany("Team", "contest_id"),
+    }).identifier(["contest_id"]),
+  Team: a
+    .model({
+      team_id: a.id().required(),
+      name: a.string(),
+      seed: a.integer(),
+      logo_ref: a.string(),
+      data: a.json(),
+      score: a.integer(),
+      contest_id: a.id().required(),
+      contest: a.belongsTo("Contest","contest_id"),
+    }).identifier(["team_id"]),
   // UserLeagues: a
   //   .model({
   //     user_id:  a.id().required(),
