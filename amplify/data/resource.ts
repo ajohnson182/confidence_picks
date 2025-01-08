@@ -15,12 +15,13 @@ const schema = a.schema({
     }).identifier(["user_id"]),
   Pick: a
     .model({
-      team: a.string().required(),
+      team_id: a.id().required(),
+      team: a.belongsTo("Team", "team_id"),
       confidence_score: a.integer(),
       user_id: a.id().required(),
       league_id: a.id().required(),
       league: a.belongsTo("League", "league_id")
-    }).identifier(["user_id","league_id","team"]),
+    }).identifier(["user_id","league_id","team_id"]),
   League: a
     .model({
       league_id:  a.id().required(),
@@ -54,7 +55,8 @@ const schema = a.schema({
       score: a.integer(),
       contest_id: a.id().required(),
       contest: a.belongsTo("Contest","contest_id"),
-    }).identifier(["team_id"]),
+      picks: a.hasMany("Pick", "team_id")
+    }).identifier(["team_id","contest_id"]),
   // UserLeagues: a
   //   .model({
   //     user_id:  a.id().required(),
