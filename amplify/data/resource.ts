@@ -16,7 +16,6 @@ const schema = a.schema({
   Pick: a
     .model({
       team_id: a.id().required(),
-      team: a.belongsTo("Team", "team_id"),
       confidence_score: a.integer(),
       user_id: a.id().required(),
       league_id: a.id().required(),
@@ -54,8 +53,7 @@ const schema = a.schema({
       data: a.json(),
       score: a.integer(),
       contest_id: a.id().required(),
-      contest: a.belongsTo("Contest","contest_id"),
-      picks: a.hasMany("Pick", "team_id")
+      contest: a.belongsTo("Contest","contest_id")
     }).identifier(["team_id","contest_id"]),
   // UserLeagues: a
   //   .model({
