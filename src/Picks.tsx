@@ -5,7 +5,7 @@ import type { Schema } from "../amplify/data/resource";
 export default function Picks() {
   
   const client = generateClient<Schema>();
-  const [picks, setPicks] = useState<any | null>(null); // useState<Schema['Pick'][]>([]);
+  const [picks, setPicks] = useState<any | null>([]); // useState<Schema['Pick'][]>([]);
 
   // const initialState = {
   //   league_id: '',
@@ -41,7 +41,7 @@ export default function Picks() {
       <h1>Picks</h1>
       <ul>
         {picks.map((pick:any) => (
-          <li key={pick.user_id}>{JSON.stringify(pick)}</li>
+          <li key={pick.user_id + pick.team_id}>{JSON.stringify(pick)}</li>
         ))}
       </ul>
     </main>

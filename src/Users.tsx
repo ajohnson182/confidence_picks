@@ -3,10 +3,10 @@ import { generateClient } from 'aws-amplify/data';
 import type { Schema } from "../amplify/data/resource";
 
 
-export default function HomePage() {
+export default function Users() {
   
   const client = generateClient<Schema>();
-  const [users, setUsers] = useState<any | null>(null);
+  const [users, setUsers] = useState<any | null>([]);
   const initialState = {
     user_id: '',
     name: ''
