@@ -17,7 +17,7 @@ const client = generateClient<Schema>();
 
 function App3() {
   // const { user, signOut } = useAuthenticator();
-  const [allPicks, setAllPicks] = useState<Pick | null>([]);
+  const [allPicks, setAllPicks] = useState<any | null>([]);
 
   useEffect(() => {
     const picks = [
@@ -1895,7 +1895,7 @@ function App3() {
           <li>Teams with byes do not score until they win a game.</li>
         </ul>
       </div>
-      {allPicks.map((pick, index) => (
+      {allPicks.map((pick:any) => (
           <div id={pick.team_id + "-" + pick.user_id}>{JSON.stringify(pick)}</div>
       ))}
     </div>
