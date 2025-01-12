@@ -112,14 +112,7 @@ function App3() {
         wrap="wrap"
         gap="xs"
       >
-      <Flex width="4vw"  key="blank">
-        <Flex alignItems="flex-start">
-          <Flex direction="column" gap="0">       
-            <Flex>
-            </Flex> 
-          </Flex>
-        </Flex>
-      </Flex>
+
       {ranks.map((p:any) => (
          <Flex width="4vw" key={"header-"+p}>
           <Flex alignItems="center">
@@ -129,7 +122,19 @@ function App3() {
       ))}
 
       {everything.map((pick:any) => (
-          <Flex
+        <Flex direction="column" gap="0">       
+            <Flex width="13vw"  key={pick.user_id}>
+              <Flex alignItems="flex-start">
+                <Flex direction="row" gap="10">       
+                  <Text fontWeight="semibold"> {pick.user_id}</Text> 
+                  <Flex>
+                    <Text fontWeight="bold">{pick.score}</Text>
+                  </Flex> 
+                  
+                </Flex>
+              </Flex>
+            </Flex>
+            <Flex
             direction="row"
             justifyContent="center"
             alignItems="center"
@@ -137,17 +142,6 @@ function App3() {
             wrap="wrap"
             gap="xs"
           >
-            <Flex width="4vw"  key={pick.user_id}>
-              <Flex alignItems="flex-start">
-                <Flex direction="column" gap="0">       
-                  <Text>{pick.user_id}</Text> 
-                  <Flex>
-                    <Text fontWeight="semibold">{pick.score}</Text>
-                  </Flex> 
-                  
-                </Flex>
-              </Flex>
-            </Flex>
             {pick.picks.map((p:any) => (
                <Flex width="4vw" key={p.team_id + pick.user_id} opacity={p.team.dead ? "0.2" : 1}>
                   <Image src={p.team.logo_ref}
@@ -155,6 +149,7 @@ function App3() {
               </Flex>
             ))}
           </Flex> 
+         </Flex>
       ))}
       </Flex>
              </div>
