@@ -4,7 +4,7 @@ import { generateClient } from "aws-amplify/data";
 // import HomePage from "HomePage"
 // import { getCurrentUser } from 'aws-amplify/auth';
 import {
-  Card,
+  // Card,
   Image,
   // Input,
   Flex,
@@ -92,8 +92,8 @@ function App3() {
       }
     }
     let sorted = JSON.parse(JSON.stringify(ret));
-    sorted = sorted.sort((a:any, b:any) => b.score-a.score);
-    return ret
+    sorted = sorted.sort((a1:any, b1:any) => b1.score-a1.score);
+    return sorted
   }
 
   return (
@@ -112,20 +112,20 @@ function App3() {
         wrap="wrap"
         gap="xs"
       >
-      <Card width="8vw"  key="blank">
+      <Flex width="8vw"  key="blank">
         <Flex alignItems="flex-start">
           <Flex direction="column" gap="0">       
             <Flex>
             </Flex> 
           </Flex>
         </Flex>
-      </Card>
+      </Flex>
       {ranks.map((p:any) => (
-         <Card width="5vw" variation="elevated" key={"header-"+p}>
+         <Flex width="5vw" key={"header-"+p}>
           <Flex alignItems="center">
             <Text text-align="center">{p}</Text>
           </Flex>
-        </Card>
+        </Flex>
       ))}
 
       {everything.map((pick:any) => (
@@ -137,19 +137,19 @@ function App3() {
             wrap="wrap"
             gap="xs"
           >
-            <Card width="5vw"  key={pick.user_id}>
+            <Flex width="5vw"  key={pick.user_id}>
               <Flex alignItems="flex-start">
                 <Flex direction="column" gap="0">       
-                  <Text>{pick.user_id}</Text> 
+                  <Text>{pick.user_id + '-' +pick.picks[0].league_id}</Text> 
                   <Flex>
                     <h1>{pick.score}</h1>
                   </Flex> 
                   
                 </Flex>
               </Flex>
-            </Card>
+            </Flex>
             {pick.picks.map((p:any) => (
-               <Card width="5vw" variation="elevated" key={p.team_id + pick.user_id} opacity={p.team.dead ? "0.2" : 1}>
+               <Flex width="5vw" key={p.team_id + pick.user_id} opacity={p.team.dead ? "0.2" : 1}>
                 <Flex alignItems="flex-start">
                   <Image src={p.team.logo_ref}
                     alt="Amplify" width="100%" />
@@ -158,7 +158,7 @@ function App3() {
                     
                   </Flex>
                 </Flex>
-              </Card>
+              </Flex>
             ))}
           </Flex> 
       ))}
