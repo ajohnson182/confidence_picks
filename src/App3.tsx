@@ -22,7 +22,7 @@ function App3() {
   const [allTeams, setAllTeams] = useState<any | null>([]);
 
   const [everything, setEverything] = useState<any | null>([]);
-  const ranks = [1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+  const ranks = [14,13,12,11,10,9,8,7,6,5,4,3,2,1];
 
   useEffect(() => {
     async function listPicks() {
@@ -112,7 +112,7 @@ function App3() {
         wrap="wrap"
         gap="xs"
       >
-      <Flex width="8vw"  key="blank">
+      <Flex width="5vw"  key="blank">
         <Flex alignItems="flex-start">
           <Flex direction="column" gap="0">       
             <Flex>
@@ -140,9 +140,9 @@ function App3() {
             <Flex width="5vw"  key={pick.user_id}>
               <Flex alignItems="flex-start">
                 <Flex direction="column" gap="0">       
-                  <Text>{pick.user_id + '-' +pick.picks[0].league_id}</Text> 
+                  <Text>{pick.user_id}</Text> 
                   <Flex>
-                    <h1>{pick.score}</h1>
+                    <Text>{pick.score}</Text>
                   </Flex> 
                   
                 </Flex>
@@ -150,14 +150,8 @@ function App3() {
             </Flex>
             {pick.picks.map((p:any) => (
                <Flex width="5vw" key={p.team_id + pick.user_id} opacity={p.team.dead ? "0.2" : 1}>
-                <Flex alignItems="flex-start">
                   <Image src={p.team.logo_ref}
                     alt="Amplify" width="100%" />
-                  <Flex direction="column" gap="0">       
-                   
-                    
-                  </Flex>
-                </Flex>
               </Flex>
             ))}
           </Flex> 
