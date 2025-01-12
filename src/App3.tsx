@@ -5,7 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 // import HomePage from "HomePage"
 // import { getCurrentUser } from 'aws-amplify/auth';
 import {
-  // Card,
+  Card,
   Image,
   // Input,
   // Badge,
@@ -113,10 +113,10 @@ function App3() {
             wrap="wrap"
             gap="xs"
           >
-          <Link to="/ava">
+          <Link to="/league/ava">
             <button> AVA </button>
           </Link>
-          <Link to="/cnutfxc">
+          <Link to="/league/cnutfxc">
             <button> CNU TFXC </button>
           </Link>
          
@@ -172,7 +172,8 @@ function App3() {
          </Flex>
       ))}
       </Flex>
-             </div>
+      <Card>...</Card>
+     </div>
     </main>
   );
 }

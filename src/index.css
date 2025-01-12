@@ -121,3 +121,9 @@ li:hover {
   margin-top: 2px;
 }
 
+.cntr {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+}
