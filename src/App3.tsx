@@ -1386,6 +1386,7 @@ function App3() {
               <Flex direction="column" gap="0">       
                 <Flex>
                   <h2>{pick.user_id}</h2> 
+                  <h1>{pick.score}</h1>
                 </Flex> 
               </Flex>
             </Flex>
