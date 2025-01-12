@@ -8,6 +8,7 @@ import {
   // Card,
   Image,
   // Input,
+  // Badge,
   Flex,
   Text,
   // useAuthenticator
@@ -120,7 +121,8 @@ function App3() {
           </Link>
          
       </Flex>
-         <h1> {league_id} - NFL Playoff Confidence Pick'em </h1> 
+         <h1 id="pagetitle"> NFL Playoff Confidence Pick'em </h1> 
+         <h2 id="pageleague"> {league_id?.toUpperCase()} </h2>
        </div>
        <Flex
         direction="row"
@@ -129,29 +131,29 @@ function App3() {
         alignContent="flex-start"
         wrap="wrap"
         gap="xs"
+        key="mainFlexWrap"
       >
 
       {ranks.map((p:any) => (
-         <Flex width="4vw" key={"header-"+p}>
-          <Flex alignItems="center">
+         <Flex width="5vw" justifyContent="center" alignItems="center" key={"header-"+p}>
             <Text text-align="center">{p}</Text>
-          </Flex>
         </Flex>
       ))}
 
       {everything.map((pick:any) => (
         <Flex direction="column" gap="0">       
-            <Flex width="13vw"  key={pick.user_id}>
-              <Flex alignItems="flex-start">
-                <Flex direction="row" gap="10">       
-                  <Text fontWeight="semibold"> {pick.user_id}</Text> 
-                  <Flex>
-                    <Text fontWeight="bold">{pick.score}</Text>
-                  </Flex> 
+            <div id="border-bottom">
+              <Flex alignItems="flex-end">
+                <Flex alignItems="baseline" direction="row" gap="20">       
+                  <Text fontWeight="bold"> <span id="score">{pick.score}</span></Text>
+                  <Text fontWeight="semibold"> {pick.user_id}</Text>   
+                  
                   
                 </Flex>
               </Flex>
-            </Flex>
+            </div>
+            
+
             <Flex
             direction="row"
             justifyContent="center"
@@ -161,7 +163,7 @@ function App3() {
             gap="xs"
           >
             {pick.picks.map((p:any) => (
-               <Flex width="4vw" key={p.team_id + pick.user_id} opacity={p.team.dead ? "0.2" : 1}>
+               <Flex width="5vw" key={p.team_id + pick.user_id} opacity={p.team.dead ? "0.2" : 1}>
                   <Image src={p.team.logo_ref}
                     alt="Amplify" width="100%" />
               </Flex>

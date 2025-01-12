@@ -2,7 +2,7 @@ body {
   margin: 0;
   /*background: linear-gradient(180deg, rgb(117, 81, 194), rgb(255, 255, 255));*/
   display: flex;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: font-family: 'Trebuchet MS', sans-serif;
   height: 100vh;
   width: 120vw;
   justify-content: center;
@@ -13,6 +13,7 @@ main {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  font-family: 'Trebuchet MS', sans-serif;
 }
 
 button {
@@ -103,3 +104,20 @@ li:hover {
   color: white;
   
 }
+#border-bottom {
+  border-bottom: 1px solid #222222;
+  margin-bottom: 5px;
+}
+#score {
+  font-size: 2em; 
+}
+
+#pagetitle {
+  margin-bottom: 5px;
+  font-family: 'Trebuchet MS', sans-serif;
+}
+
+#pageleague {
+  margin-top: 2px;
+}
+
