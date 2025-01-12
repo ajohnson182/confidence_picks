@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
+import { Link, useParams } from 'react-router-dom';
 // import HomePage from "HomePage"
 // import { getCurrentUser } from 'aws-amplify/auth';
 import {
@@ -24,16 +25,19 @@ function App3() {
   const [everything, setEverything] = useState<any | null>([]);
   const ranks = [14,13,12,11,10,9,8,7,6,5,4,3,2,1];
 
+  let { league_id } = useParams();
+
   useEffect(() => {
     async function listPicks() {
         // fetch all todos
-        const { data } = await client.models.Pick.list({limit: 200});
+        const { data } = await client.models.Pick.list({filter:{league_id: { eq: league_id}}, limit: 200});
         let picks_sorted = JSON.parse(JSON.stringify(data));
         picks_sorted = picks_sorted.sort((a:any, b:any) => b.confidence_score-a.confidence_score);
         setAllPicks(picks_sorted);
+        // console.log(picks_sorted);
     }
     listPicks();
-  }, []);
+  }, [league_id]);
 
   useEffect(() => {
     async function listUsers() {
@@ -86,7 +90,7 @@ function App3() {
             }
           }
       }
-      console.log(JSON.stringify(u));
+      // console.log(JSON.stringify(u));
       if (u.picks.length == 14) { 
         ret.push(u);
       }
@@ -100,9 +104,23 @@ function App3() {
      <main>
        <div id="SingleProjectContainer"> 
        <div id="headline">
-         <h1> Confidence Pick'em </h1> 
+       <Flex
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            alignContent="flex-start"
+            wrap="wrap"
+            gap="xs"
+          >
+          <Link to="/ava">
+            <button> AVA </button>
+          </Link>
+          <Link to="/cnutfxc">
+            <button> CNU TFXC </button>
+          </Link>
          
-       
+      </Flex>
+         <h1> {league_id} - NFL Playoff Confidence Pick'em </h1> 
        </div>
        <Flex
         direction="row"

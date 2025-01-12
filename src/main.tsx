@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from "react-dom/client";
 // import { Authenticator } from '@aws-amplify/ui-react';
 // import { withAuthenticator } from '@aws-amplify/ui-react';
-import App3 from "./App3.tsx";
+import App4 from "./App4.tsx";
 import "./index.css";
 import { Amplify } from 'aws-amplify';
 import outputs from "../amplify_outputs.json";
@@ -14,6 +14,6 @@ Amplify.configure(outputs);
 ReactDOM.createRoot(document.getElementById("root")!).render(
     
   <React.StrictMode>
-      <App3/>
+      <App4/>
   </React.StrictMode>
 );
