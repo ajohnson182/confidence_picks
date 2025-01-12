@@ -53,6 +53,7 @@ const schema = a.schema({
       data: a.json(),
       score: a.integer(),
       contest_id: a.id().required(),
+      dead: a.boolean(),
       contest: a.belongsTo("Contest","contest_id")
     }).identifier(["team_id","contest_id"]),
   // UserLeagues: a
