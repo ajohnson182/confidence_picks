@@ -112,7 +112,7 @@ function App3() {
         wrap="wrap"
         gap="xs"
       >
-      <Flex width="5vw"  key="blank">
+      <Flex width="4vw"  key="blank">
         <Flex alignItems="flex-start">
           <Flex direction="column" gap="0">       
             <Flex>
@@ -121,7 +121,7 @@ function App3() {
         </Flex>
       </Flex>
       {ranks.map((p:any) => (
-         <Flex width="5vw" key={"header-"+p}>
+         <Flex width="4vw" key={"header-"+p}>
           <Flex alignItems="center">
             <Text text-align="center">{p}</Text>
           </Flex>
@@ -137,19 +137,19 @@ function App3() {
             wrap="wrap"
             gap="xs"
           >
-            <Flex width="5vw"  key={pick.user_id}>
+            <Flex width="4vw"  key={pick.user_id}>
               <Flex alignItems="flex-start">
                 <Flex direction="column" gap="0">       
                   <Text>{pick.user_id}</Text> 
                   <Flex>
-                    <Text>{pick.score}</Text>
+                    <Text fontWeight="semibold">{pick.score}</Text>
                   </Flex> 
                   
                 </Flex>
               </Flex>
             </Flex>
             {pick.picks.map((p:any) => (
-               <Flex width="5vw" key={p.team_id + pick.user_id} opacity={p.team.dead ? "0.2" : 1}>
+               <Flex width="4vw" key={p.team_id + pick.user_id} opacity={p.team.dead ? "0.2" : 1}>
                   <Image src={p.team.logo_ref}
                     alt="Amplify" width="100%" />
               </Flex>
