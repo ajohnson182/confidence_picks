@@ -22,7 +22,7 @@ function App3() {
   const [allTeams, setAllTeams] = useState<any | null>([]);
   const [everything, setEverything] = useState<any | null>([]);
   
-  useEffect(() => {
+  // useEffect(() => {
     // const picks = [
     //   {
     //       "user_id": "Michelle",
@@ -1118,148 +1118,148 @@ function App3() {
     //   }
     // ];
 
-    const teams = [
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/xymxwrxtyj9fhaemhdyd",
-            "name": "Washington Commanders",
-            "owner": null,
-            "seed": 6,
-            "team_id": "commanders",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/giphcy6ie9mxbnldntsf",
-            "name": "Buffalo Bills",
-            "owner": null,
-            "seed": 2,
-            "team_id": "bills",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/upload/f_auto/league/u6camnphqvjc6mku6u3c",
-            "name": "Houson Texans",
-            "owner": null,
-            "seed": 4,
-            "team_id": "texans",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/teguylrnqqmfcwxvcmmz",
-            "name": "Minnesota Vikings",
-            "owner": null,
-            "seed": 5,
-            "team_id": "vikings",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/gppfvr7n8gljgjaqux2x",
-            "name": "Green Bay Packers",
-            "owner": null,
-            "seed": 7,
-            "team_id": "packers",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ayvwcmluj2ohkdlbiegi",
-            "name": "Los Angeles Rams",
-            "owner": null,
-            "seed": 4,
-            "team_id": "rams",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/puhrqgj71gobgdkdo6uq",
-            "name": "Philidelphia Eagles",
-            "owner": null,
-            "seed": 2,
-            "team_id": "eagles",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/v8uqiualryypwqgvwcih",
-            "name": "Tampa Bay Buccaneers",
-            "owner": null,
-            "seed": 3,
-            "team_id": "buccaneers",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/xujg9t3t4u5nmjgr54wx",
-            "name": "Pittsburgh Steelers",
-            "owner": null,
-            "seed": 5,
-            "team_id": "steelers",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ucsdijmddsqcj1i9tddd",
-            "name": "Baltimore Ravens",
-            "owner": null,
-            "seed": 3,
-            "team_id": "ravens",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ocvxwnapdvwevupe4tpr",
-            "name": "Detroit Lions",
-            "owner": null,
-            "seed": 1,
-            "team_id": "lions",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ujshjqvmnxce8m4obmvs",
-            "name": "Kansas City Chiefs",
-            "owner": null,
-            "seed": 1,
-            "team_id": "chiefs",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/dhfidtn8jrumakbogeu4",
-            "name": "Los Angeles Chargers",
-            "owner": null,
-            "seed": 6,
-            "team_id": "chargers",
-            "score": null
-          },
-          {
-            "contest_id": "nfl_playoff_24-25",
-            "data": null,
-            "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/t0p7m5cjdjy18rnzzqbx",
-            "name": "Denver Broncos",
-            "owner": null,
-            "seed": 7,
-            "team_id": "broncos",
-            "score": null
-          }
-    ];
+    // const teams = [
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/xymxwrxtyj9fhaemhdyd",
+    //         "name": "Washington Commanders",
+    //         "owner": null,
+    //         "seed": 6,
+    //         "team_id": "commanders",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/giphcy6ie9mxbnldntsf",
+    //         "name": "Buffalo Bills",
+    //         "owner": null,
+    //         "seed": 2,
+    //         "team_id": "bills",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/upload/f_auto/league/u6camnphqvjc6mku6u3c",
+    //         "name": "Houson Texans",
+    //         "owner": null,
+    //         "seed": 4,
+    //         "team_id": "texans",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/teguylrnqqmfcwxvcmmz",
+    //         "name": "Minnesota Vikings",
+    //         "owner": null,
+    //         "seed": 5,
+    //         "team_id": "vikings",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/gppfvr7n8gljgjaqux2x",
+    //         "name": "Green Bay Packers",
+    //         "owner": null,
+    //         "seed": 7,
+    //         "team_id": "packers",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ayvwcmluj2ohkdlbiegi",
+    //         "name": "Los Angeles Rams",
+    //         "owner": null,
+    //         "seed": 4,
+    //         "team_id": "rams",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/puhrqgj71gobgdkdo6uq",
+    //         "name": "Philidelphia Eagles",
+    //         "owner": null,
+    //         "seed": 2,
+    //         "team_id": "eagles",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/v8uqiualryypwqgvwcih",
+    //         "name": "Tampa Bay Buccaneers",
+    //         "owner": null,
+    //         "seed": 3,
+    //         "team_id": "buccaneers",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/xujg9t3t4u5nmjgr54wx",
+    //         "name": "Pittsburgh Steelers",
+    //         "owner": null,
+    //         "seed": 5,
+    //         "team_id": "steelers",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ucsdijmddsqcj1i9tddd",
+    //         "name": "Baltimore Ravens",
+    //         "owner": null,
+    //         "seed": 3,
+    //         "team_id": "ravens",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ocvxwnapdvwevupe4tpr",
+    //         "name": "Detroit Lions",
+    //         "owner": null,
+    //         "seed": 1,
+    //         "team_id": "lions",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/ujshjqvmnxce8m4obmvs",
+    //         "name": "Kansas City Chiefs",
+    //         "owner": null,
+    //         "seed": 1,
+    //         "team_id": "chiefs",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/dhfidtn8jrumakbogeu4",
+    //         "name": "Los Angeles Chargers",
+    //         "owner": null,
+    //         "seed": 6,
+    //         "team_id": "chargers",
+    //         "score": null
+    //       },
+    //       {
+    //         "contest_id": "nfl_playoff_24-25",
+    //         "data": null,
+    //         "logo_ref": "https://static.www.nfl.com/image/private/f_auto/league/t0p7m5cjdjy18rnzzqbx",
+    //         "name": "Denver Broncos",
+    //         "owner": null,
+    //         "seed": 7,
+    //         "team_id": "broncos",
+    //         "score": null
+    //       }
+    // ];
   //   function createUsers(users:any) {
   //     for(let i=0; i<users.length; i++) { 
   //       client.models.User.create({ 
@@ -1282,21 +1282,21 @@ function App3() {
   //     }
   //   }  
 
-    function createTeams(team:any) {
-      for(let i=0; i<team.length; i++) { 
-        client.models.Team.create({ 
-          contest_id: team[i].contest_id,
-          logo_ref: team[i].logo_ref,
-          name: team[i].name,
-          seed: team[i].seed,
-          team_id: team[i].team_id,
-          score: team[i].score
-        });
-      }
-    }  
+    // function createTeams(team:any) {
+    //   for(let i=0; i<team.length; i++) { 
+    //     client.models.Team.create({ 
+    //       contest_id: team[i].contest_id,
+    //       logo_ref: team[i].logo_ref,
+    //       name: team[i].name,
+    //       seed: team[i].seed,
+    //       team_id: team[i].team_id,
+    //       score: team[i].score
+    //     });
+    //   }
+    // }  
 
-    createTeams(teams);
-  }, []);  
+  //   createTeams(teams);
+  // }, []);  
 
   useEffect(() => {
     async function listPicks() {
@@ -1308,7 +1308,7 @@ function App3() {
         setEverything(display());
     }
     listPicks();
-  }, []);
+  }, [allPicks]);
 
   useEffect(() => {
     async function listUsers() {
@@ -1318,7 +1318,7 @@ function App3() {
     }
     listUsers();
 
-  }, []);
+  }, [allUsers]);
 
   useEffect(() => {
     async function listTeams() {
@@ -1327,7 +1327,7 @@ function App3() {
         setAllTeams(data);
     }
     listTeams();
-  }, []); 
+  }, [allTeams]); 
 
   function display(){
     let ret:any = [];
