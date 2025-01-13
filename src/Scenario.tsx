@@ -671,7 +671,7 @@ function Scenario() {
                         labelHidden
                         onStepChange={handlePackersOnStepChange}
                         min={nfc[6]?.score}
-                        max={4}
+                        max={nfc[6]?.dead ? nfc[6]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
