@@ -17,6 +17,7 @@ import {
   Image,
   // Input,
   StepperField,
+  ThemeProvider,
   // Badge,
   Flex,
   Text,
@@ -44,6 +45,19 @@ let scenario_score = {
 const NFC = "rams eagles packers commanders buccaneers vikings lions";
 const AFC = "texans steelers chargers broncos bills chiefs ravens";
 
+const theme = {
+  name: 'stepper-theme',
+  tokens: {
+    components: {
+      stepperfield: {
+        input: {
+          fontSize: { value: '10px' },
+        },
+      },
+    },
+  },
+};
+
 function Scenario() {
   // const { user, signOut } = useAuthenticator();
   const [allPicks, setAllPicks] = useState<any | null>([]);
@@ -70,6 +84,14 @@ function Scenario() {
   const [everything, setEverything] = useState<any | null>([]);
   const ranks = [14,13,12,11,10,9,8,7,6,5,4,3,2,1];
 
+  const useToggle = (initialState:any) => {
+    const [toggleValue, setToggleValue] = useState(initialState);
+
+    const toggler = () => { setToggleValue(!toggleValue) };
+    return [toggleValue, toggler]
+  };
+
+  const [toggle, setToggle] = useToggle(true);
   let { league_id } = useParams();
   
 
@@ -102,42 +124,6 @@ function Scenario() {
   useEffect(() => {
     async function listTeams() {
         // fetch all todos
-        client.models.Team.update({ 
-          team_id: 'chargers',
-          score: 0,
-          contest_id: 'nfl_playoff_24-25',
-          dead: false
-        });
-        client.models.Team.update({ 
-          team_id: 'ravens',
-          score: 1,
-          contest_id: 'nfl_playoff_24-25',
-          dead: false
-        });
-        client.models.Team.update({ 
-          team_id: 'texans',
-          score: 1,
-          contest_id: 'nfl_playoff_24-25',
-          dead: false
-        });
-        client.models.Team.update({ 
-          team_id: 'broncos',
-          score: 0,
-          contest_id: 'nfl_playoff_24-25',
-          dead: false
-        });
-        client.models.Team.update({ 
-          team_id: 'steelers',
-          score: 0,
-          contest_id: 'nfl_playoff_24-25',
-          dead: false
-        });
-        client.models.Team.update({ 
-          team_id: 'bills',
-          score: 1,
-          contest_id: 'nfl_playoff_24-25',
-          dead: false
-        });
 
         const { data } = await client.models.Team.list();
         let teams_sorted = JSON.parse(JSON.stringify(data));
@@ -283,8 +269,9 @@ function Scenario() {
       </Flex>
          <h1 id="pagetitle"> NFL Playoff Confidence Pick'em </h1> 
          <h2 id="pageleague"> {league_id?.toUpperCase()} </h2>
-       
-       <Table title="Table">
+       <button onClick={setToggle}> Toggle Scenario Inputs </button>
+       {toggle && (
+       <Table title="Scenarios">
         <TableHead>
           <TableRow>
             <TableCell className="cntr" as="th">AFC</TableCell>
@@ -293,315 +280,316 @@ function Scenario() {
         </TableHead>
         <TableBody>
           <TableRow>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={afc[0]?.team_id}>
-                <Flex alignItems="flex-start">
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={afc[0]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
                   <Image src={afc[0]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        padding={0}
                         min={0}
                         max={3}
                         label={afc[0]?.team_id}
                         value={chiefsVal}
                         labelHidden
-                        isDisabled={afc[0]?.dead}
                         onStepChange={handleChiefsOnStepChange}
                       />
-                    </Flex>
-                  </Flex>
+                      </ThemeProvider>
                 </Flex>
-              </Card>
+              {/*</Card>*/}
             </TableCell>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={nfc[0]?.team_id}>
-                <Flex alignItems="flex-start">
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={nfc[0]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
                   <Image src={nfc[0]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        padding={0}
                         min={0}
                         max={3}
                         label={nfc[0]?.team_id}
                         value={lionsVal}
                         labelHidden
-                        isDisabled={nfc[0]?.dead}
                         onStepChange={handleLionsOnStepChange}
                       />
-                    </Flex>
-                  </Flex>
+                      </ThemeProvider>
                 </Flex>
-              </Card>
+              {/*</Card>*/}
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={afc[1]?.team_id}>
-                <Flex alignItems="flex-start">
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={afc[1]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
                   <Image src={afc[1]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        min={0}
-                        max={4}
+                        padding={0}
                         label={afc[1]?.team_id}
                         value={billsVal}
                         labelHidden
-                        isDisabled={afc[1]?.dead}
                         onStepChange={handleBillsOnStepChange}
-                      />
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Card>
-            </TableCell>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={nfc[1]?.team_id}>
-                <Flex alignItems="flex-start">
-                  <Image src={nfc[1]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
-                      <StepperField
                         min={0}
                         max={4}
+                      />
+                      </ThemeProvider>
+                </Flex>
+              {/*</Card>*/}
+            </TableCell>
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={nfc[1]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
+                  <Image src={nfc[1]?.logo_ref}
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
+                      <StepperField
+                        padding={0}
                         label={nfc[1]?.team_id}
                         value={eaglesVal}
                         labelHidden
-                        isDisabled={nfc[1]?.dead}
                         onStepChange={handleEaglesOnStepChange}
+                        min={0}
+                        max={4}
                       />
-                    </Flex>
-                  </Flex>
+                      </ThemeProvider>
                 </Flex>
-              </Card>
+              {/*</Card>*/}
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={afc[2]?.team_id}>
-                <Flex alignItems="flex-start">
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={afc[2]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
                   <Image src={afc[2]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        min={0}
-                        max={4}
+                        padding={0}
                         label={afc[2]?.team_id}
                         value={ravensVal}
                         labelHidden
-                        isDisabled={afc[2]?.dead}
                         onStepChange={handleRavensOnStepChange}
-                      />
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Card>
-            </TableCell>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={nfc[2]?.team_id}>
-                <Flex alignItems="flex-start">
-                  <Image src={nfc[2]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
-                      <StepperField
                         min={0}
                         max={4}
+                      />
+                      </ThemeProvider>
+                </Flex>
+              {/*</Card>*/}
+            </TableCell>
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={nfc[2]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
+                  <Image src={nfc[2]?.logo_ref}
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
+                      <StepperField
+                        padding={0}
                         label={nfc[2]?.team_id}
                         value={buccaneersVal}
                         labelHidden
-                        isDisabled={nfc[2]?.dead}
                         onStepChange={handleBuccaneersOnStepChange}
+                        min={0}
+                        max={4}
                       />
-                    </Flex>
-                  </Flex>
+                      </ThemeProvider>
                 </Flex>
-              </Card>
+              {/*</Card>*/}
             </TableCell>
             </TableRow>
             <TableRow>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={afc[3]?.team_id}>
-                <Flex alignItems="flex-start">
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={afc[3]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
                   <Image src={afc[3]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        min={0}
-                        max={4}
+                        padding={0}
                         label={afc[3]?.team_id}
                         value={texansVal}
                         labelHidden
-                        isDisabled={afc[3]?.dead}
                         onStepChange={handleTexansOnStepChange}
-                      />
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Card>
-            </TableCell>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={nfc[3]?.team_id}>
-                <Flex alignItems="flex-start">
-                  <Image src={nfc[3]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
-                      <StepperField
                         min={0}
                         max={4}
+                      />
+                      </ThemeProvider>
+                </Flex>
+              {/*</Card>*/}
+            </TableCell>
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={nfc[3]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
+                  <Image src={nfc[3]?.logo_ref}
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
+                      <StepperField
+                        padding={0}
                         label={nfc[3]?.team_id}
                         value={ramsVal}
                         labelHidden
-                        isDisabled={nfc[3]?.dead}
                         onStepChange={handleRamsOnStepChange}
+                        min={0}
+                        max={4}
                       />
-                    </Flex>
-                  </Flex>
+                      </ThemeProvider>
                 </Flex>
-              </Card>
+              {/*</Card>*/}
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={afc[4]?.team_id}>
-                <Flex alignItems="flex-start">
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={afc[4]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
                   <Image src={afc[4]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        min={0}
-                        max={4}
+                        padding={0}
                         label={afc[4]?.team_id}
                         value={steelersVal}
                         labelHidden
-                        isDisabled={afc[4]?.dead}
                         onStepChange={handleSteelersOnStepChange}
-                      />
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Card>
-            </TableCell>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={nfc[4]?.team_id}>
-                <Flex alignItems="flex-start">
-                  <Image src={nfc[4]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
-                      <StepperField
                         min={0}
                         max={4}
+                      />
+                      </ThemeProvider>
+                </Flex>
+              {/*</Card>*/}
+            </TableCell>
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={nfc[4]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
+                  <Image src={nfc[4]?.logo_ref}
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
+                      <StepperField
+                        padding={0}
                         label={nfc[4]?.team_id}
                         value={vikingsVal}
                         labelHidden
-                        isDisabled={nfc[4]?.dead}
                         onStepChange={handleVikingsOnStepChange}
+                        min={0}
+                        max={4}
                       />
-                    </Flex>
-                  </Flex>
+                      </ThemeProvider>
                 </Flex>
-              </Card>
+              {/*</Card>*/}
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={afc[5]?.team_id}>
-                <Flex alignItems="flex-start">
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={afc[5]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
                   <Image src={afc[5]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        min={0}
-                        max={4}
+                        padding={0}
                         label={afc[5]?.team_id}
                         value={chargersVal}
                         labelHidden
-                        isDisabled={afc[5]?.dead}
                         onStepChange={handleChargersOnStepChange}
-                      />
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Card>
-            </TableCell>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={nfc[5]?.team_id}>
-                <Flex alignItems="flex-start">
-                  <Image src={nfc[5]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
-                      <StepperField
                         min={0}
                         max={4}
+                      />
+                      </ThemeProvider>
+                </Flex>
+              {/*</Card>*/}
+            </TableCell>
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={nfc[5]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
+                  <Image src={nfc[5]?.logo_ref}
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
+                      <StepperField
+                        padding={0}
                         label={nfc[5]?.team_id}
                         value={commandersVal}
                         labelHidden
-                        isDisabled={nfc[5]?.dead}
                         onStepChange={handleCommandersOnStepChange}
+                        min={0}
+                        max={4}
                       />
-                    </Flex>
-                  </Flex>
+                      </ThemeProvider>
                 </Flex>
-              </Card>
+              {/*</Card>*/}
             </TableCell>
           </TableRow>
           <TableRow>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={afc[6]?.team_id}>
-                <Flex alignItems="flex-start">
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={afc[6]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
                   <Image src={afc[6]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        min={0}
-                        max={4}
+                        padding={0}
                         label={afc[6]?.team_id}
                         value={broncosVal}
                         labelHidden
-                        isDisabled={afc[6]?.dead}
                         onStepChange={handleBroncosOnStepChange}
-                      />
-                    </Flex>
-                  </Flex>
-                </Flex>
-              </Card>
-            </TableCell>
-            <TableCell className="cntr">
-              <Card variation="elevated" key={nfc[6]?.team_id}>
-                <Flex alignItems="flex-start">
-                  <Image src={nfc[6]?.logo_ref}
-                    alt="Amplify" width="3rem"/>
-                  <Flex direction="column" gap="0">       
-                    <Flex>
-                      <StepperField
                         min={0}
                         max={4}
+                      />
+                      </ThemeProvider>
+                </Flex>
+              {/*</Card>*/}
+            </TableCell>
+            <TableCell className="cntr" padding={0}>
+              {/*<Card variation="elevated" key={nfc[6]?.team_id} padding={0} margin={0}>*/}
+                <Flex direction="column" alignItems="center" margin={0} padding={0}>
+                  <div className="cntr-img">
+                  <Image src={nfc[6]?.logo_ref}
+                    alt="Amplify" width="5vw"/>
+                    </div>
+                      <ThemeProvider theme={theme} colorMode="light">
+                      <StepperField
+                        padding={0}
                         label={nfc[60]?.team_id}
                         value={packersVal}
                         labelHidden
-                        isDisabled={nfc[60]?.dead}
                         onStepChange={handlePackersOnStepChange}
+                        min={0}
+                        max={4}
                       />
-                    </Flex>
-                  </Flex>
+                      </ThemeProvider>
                 </Flex>
-              </Card>
+              {/*</Card>*/}
             </TableCell>
           </TableRow>
         </TableBody>
       </Table>
+      )}
       </div>
 
        <Flex
