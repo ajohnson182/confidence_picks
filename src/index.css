@@ -117,8 +117,20 @@ li:hover {
   font-family: 'Trebuchet MS', sans-serif;
 }
 
+#pagetitle-scenario {
+  margin-bottom: 5px;
+  font-family: 'Trebuchet MS', sans-serif;
+  color: #FF0000;
+}
+
 #pageleague {
   margin-top: 2px;
+  margin-bottom:2px;
+}
+
+#scenariolink {
+  margin-top: 2px;
+  margin-bottom:5px;
 }
 
 .cntr {

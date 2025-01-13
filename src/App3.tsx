@@ -119,10 +119,16 @@ function App3() {
           <Link to="/league/cnutfxc">
             <button> CNU TFXC </button>
           </Link>
+          <Link to="/">
+            <button> ALL ENTRIES </button>
+          </Link>
          
       </Flex>
-         <h1 id="pagetitle"> NFL Playoff Confidence Pick'em </h1> 
+         <h1 id="pagetitle"> NFL Playoff Pick'em Scoreboard </h1> 
          <h2 id="pageleague"> {league_id?.toUpperCase()} </h2>
+         <Link to={league_id ? "/scenario/" + league_id : "/scenario"}>
+            <h4 id="scenariolink">(go to scenario builder)</h4>
+          </Link>
        </div>
        <Flex
         direction="row"

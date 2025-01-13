@@ -259,16 +259,22 @@ function Scenario() {
             wrap="wrap"
             gap="xs"
           >
-          <Link to="/ava">
+          <Link to="/scenario/ava">
             <button> AVA </button>
           </Link>
-          <Link to="/cnutfxc">
+          <Link to="/scenario/cnutfxc">
             <button> CNU TFXC </button>
+          </Link>
+          <Link to="/">
+            <button> ALL ENTRIES </button>
           </Link>
          
       </Flex>
-         <h1 id="pagetitle"> NFL Playoff Confidence Pick'em </h1> 
+         <h1 id="pagetitle-scenario"> Scenario Builder </h1> 
          <h2 id="pageleague"> {league_id?.toUpperCase()} </h2>
+         <Link to={league_id ? "/league/" + league_id : "/"}>
+            <h4 id="scenariolink">(back to Scoreboard)</h4>
+          </Link>
        <button onClick={setToggle}> Toggle Scenario Inputs </button>
        {toggle && (
        <Table title="Scenarios">
