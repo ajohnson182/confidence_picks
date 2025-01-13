@@ -265,7 +265,7 @@ function Scenario() {
           <Link to="/scenario/cnutfxc">
             <button> CNU TFXC </button>
           </Link>
-          <Link to="/">
+          <Link to="/scenario">
             <button> ALL ENTRIES </button>
           </Link>
          
