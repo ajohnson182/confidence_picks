@@ -93,7 +93,6 @@ function Scenario() {
 
   const [toggle, setToggle] = useToggle(true);
   let { league_id } = useParams();
-  
 
   // let nfc = [];
   // let afc = [];
@@ -123,8 +122,17 @@ function Scenario() {
 
   useEffect(() => {
     async function listTeams() {
-        // fetch all todos
-
+        // client.models.Team.update({
+        //   team_id: "eagles",
+        //   contest_id: "nfl_playoff_24-25",
+        //   score: 1
+        // });
+        // client.models.Team.update({
+        //   team_id: "chiefs",
+        //   contest_id: "nfl_playoff_24-25",
+        //   score: 0,
+        //   dead: false
+        // });
         const { data } = await client.models.Team.list();
         let teams_sorted = JSON.parse(JSON.stringify(data));
         teams_sorted = teams_sorted.sort((a:any, b:any) => a.seed-b.seed);
@@ -133,11 +141,70 @@ function Scenario() {
 
         setNFC(nfc1);
         setAFC(afc1);
-        for(let i:any; i<teams_sorted.length; i++) {
-          scenario_score[teams_sorted[i].team_id as keyof typeof scenario_score] = teams_sorted[i].score;
-        }
         setAllTeams(teams_sorted);
         setEverything(display());
+        
+        for(let i=0; i<teams_sorted.length; i++) {
+        
+          scenario_score[teams_sorted[i].team_id as keyof typeof scenario_score] = teams_sorted[i].score;
+          if(teams_sorted[i].team_id == "texans") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setTexansVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "steelers") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setSteelersVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "rams") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setRamsVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "eagles") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setEaglesVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "packers") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setPackersVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "commanders") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setCommandersVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "chargers") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setChargersVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "broncos") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setBroncosVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "bills") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setBillsVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "buccaneers") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setBuccaneersVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "vikings") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setVikingsVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "lions") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setLionsVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "chiefs") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setChiefsVal(teams_sorted[i].score);
+          }
+          if(teams_sorted[i].team_id == "ravens") { 
+            updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            setRavensVal(teams_sorted[i].score);
+          }
+          
+        }
     }
     listTeams();
   }, [allUsers,allPicks]); 
@@ -200,11 +267,11 @@ function Scenario() {
   };
 
   function updateScore(team:string,score:any){
-    console.log("setting " + team + " score to " + score);
+    // console.log("setting " + team + " score to " + score);
     
     scenario_score[team as keyof typeof scenario_score] = parseInt(score);
     setEverything(display());
-    console.log(JSON.stringify(scenario_score));
+    // console.log(JSON.stringify(scenario_score));
   }
 
   function display(){
@@ -295,8 +362,9 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={afc[0]?.dead}
                         padding={0}
-                        min={0}
+                        min={scenario_score[afc[0]?.team_id as keyof typeof scenario_score]}
                         max={3}
                         label={afc[0]?.team_id}
                         value={chiefsVal}
@@ -316,8 +384,9 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={nfc[0]?.dead}
                         padding={0}
-                        min={0}
+                        min={scenario_score[nfc[0]?.team_id as keyof typeof scenario_score]}
                         max={3}
                         label={nfc[0]?.team_id}
                         value={lionsVal}
@@ -339,12 +408,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={afc[1]?.dead}
                         padding={0}
                         label={afc[1]?.team_id}
                         value={billsVal}
                         labelHidden
                         onStepChange={handleBillsOnStepChange}
-                        min={0}
+                        min={scenario_score[afc[1]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
@@ -360,12 +430,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={nfc[1]?.dead}
                         padding={0}
                         label={nfc[1]?.team_id}
                         value={eaglesVal}
                         labelHidden
                         onStepChange={handleEaglesOnStepChange}
-                        min={0}
+                        min={scenario_score[nfc[1]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
@@ -383,12 +454,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={afc[2]?.dead}
                         padding={0}
                         label={afc[2]?.team_id}
                         value={ravensVal}
                         labelHidden
                         onStepChange={handleRavensOnStepChange}
-                        min={0}
+                        min={scenario_score[afc[2]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
@@ -404,12 +476,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={nfc[2]?.dead}
                         padding={0}
                         label={nfc[2]?.team_id}
                         value={buccaneersVal}
                         labelHidden
                         onStepChange={handleBuccaneersOnStepChange}
-                        min={0}
+                        min={scenario_score[nfc[2]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
@@ -427,12 +500,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={afc[3]?.dead}
                         padding={0}
                         label={afc[3]?.team_id}
                         value={texansVal}
                         labelHidden
                         onStepChange={handleTexansOnStepChange}
-                        min={0}
+                        min={scenario_score[afc[3]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
@@ -448,12 +522,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={nfc[3]?.dead}
                         padding={0}
                         label={nfc[3]?.team_id}
                         value={ramsVal}
                         labelHidden
                         onStepChange={handleRamsOnStepChange}
-                        min={0}
+                        min={scenario_score[nfc[3]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
@@ -471,12 +546,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={afc[4]?.dead}
                         padding={0}
                         label={afc[4]?.team_id}
                         value={steelersVal}
                         labelHidden
                         onStepChange={handleSteelersOnStepChange}
-                        min={0}
+                        min={scenario_score[afc[4]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
@@ -492,12 +568,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={nfc[4]?.dead}
                         padding={0}
                         label={nfc[4]?.team_id}
                         value={vikingsVal}
                         labelHidden
                         onStepChange={handleVikingsOnStepChange}
-                        min={0}
+                        min={scenario_score[nfc[4]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
@@ -515,12 +592,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={afc[5]?.dead}
                         padding={0}
                         label={afc[5]?.team_id}
                         value={chargersVal}
                         labelHidden
                         onStepChange={handleChargersOnStepChange}
-                        min={0}
+                        min={scenario_score[afc[5]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
@@ -536,12 +614,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={nfc[5]?.dead}
                         padding={0}
                         label={nfc[5]?.team_id}
                         value={commandersVal}
                         labelHidden
                         onStepChange={handleCommandersOnStepChange}
-                        min={0}
+                        min={scenario_score[nfc[5]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
@@ -559,12 +638,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={afc[6]?.dead}
                         padding={0}
                         label={afc[6]?.team_id}
                         value={broncosVal}
                         labelHidden
                         onStepChange={handleBroncosOnStepChange}
-                        min={0}
+                        min={scenario_score[afc[6]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
@@ -572,7 +652,7 @@ function Scenario() {
               {/*</Card>*/}
             </TableCell>
             <TableCell className="cntr" padding={0}>
-              {/*<Card variation="elevated" key={nfc[6]?.team_id} padding={0} margin={0}>*/}
+              {/*<Card variation="elevated" key={afc[6]?.team_id} padding={0} margin={0}>*/}
                 <Flex direction="column" alignItems="center" margin={0} padding={0}>
                   <div className="cntr-img">
                   <Image src={nfc[6]?.logo_ref}
@@ -580,12 +660,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
+                        isDisabled={nfc[6]?.dead}
                         padding={0}
-                        label={nfc[60]?.team_id}
+                        label={nfc[6]?.team_id}
                         value={packersVal}
                         labelHidden
                         onStepChange={handlePackersOnStepChange}
-                        min={0}
+                        min={scenario_score[nfc[6]?.team_id as keyof typeof scenario_score]}
                         max={4}
                       />
                       </ThemeProvider>
