@@ -301,6 +301,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={3}
                         label={afc[0]?.team_id}
                         value={chiefsVal}
                         labelHidden
@@ -320,6 +322,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={3}
                         label={nfc[0]?.team_id}
                         value={lionsVal}
                         labelHidden
@@ -341,6 +345,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={afc[1]?.team_id}
                         value={billsVal}
                         labelHidden
@@ -360,6 +366,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={nfc[1]?.team_id}
                         value={eaglesVal}
                         labelHidden
@@ -381,6 +389,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={afc[2]?.team_id}
                         value={ravensVal}
                         labelHidden
@@ -400,6 +410,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={nfc[2]?.team_id}
                         value={buccaneersVal}
                         labelHidden
@@ -421,6 +433,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={afc[3]?.team_id}
                         value={texansVal}
                         labelHidden
@@ -440,6 +454,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={nfc[3]?.team_id}
                         value={ramsVal}
                         labelHidden
@@ -461,6 +477,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={afc[4]?.team_id}
                         value={steelersVal}
                         labelHidden
@@ -480,6 +498,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={nfc[4]?.team_id}
                         value={vikingsVal}
                         labelHidden
@@ -501,6 +521,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={afc[5]?.team_id}
                         value={chargersVal}
                         labelHidden
@@ -520,6 +542,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={nfc[5]?.team_id}
                         value={commandersVal}
                         labelHidden
@@ -541,6 +565,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={afc[6]?.team_id}
                         value={broncosVal}
                         labelHidden
@@ -560,6 +586,8 @@ function Scenario() {
                   <Flex direction="column" gap="0">       
                     <Flex>
                       <StepperField
+                        min={0}
+                        max={4}
                         label={nfc[60]?.team_id}
                         value={packersVal}
                         labelHidden
