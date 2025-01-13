@@ -152,7 +152,7 @@ function App3() {
               <Flex alignItems="flex-end">
                 <Flex alignItems="baseline" direction="row" gap="20">       
                   <Text fontWeight="bold"> <span id="score">{pick.score}</span></Text>
-                  <Text fontWeight="semibold"> {pick.user_id}</Text>   
+                  <Text fontWeight="semibold"> {league_id ? pick.user_id : pick.user_id + ' (' + pick.picks[0].league_id.toUpperCase() + ')'}</Text>    
                   
                   
                 </Flex>
