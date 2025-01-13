@@ -15,7 +15,7 @@ import {
   TableRow,
   Card,
   Image,
-  Input,
+  // Input,
   StepperField,
   // Badge,
   Flex,
@@ -24,22 +24,22 @@ import {
 } from '@aws-amplify/ui-react';
 
 const client = generateClient<Schema>();
-  let scenario_score = {
-      "texans": 0,
-      "steelers": 0,
-      "rams": 0,
-      "eagles": 0,
-      "packers": 0,
-      "commanders": 0,
-      "chargers": 0,
-      "broncos": 0,
-      "bills": 0,
-      "buccaneers": 0,
-      "vikings": 0,
-      "lions": 0,
-      "chiefs": 0,
-      "ravens": 0
-    };
+let scenario_score = {
+    "texans": 0,
+    "steelers": 0,
+    "rams": 0,
+    "eagles": 0,
+    "packers": 0,
+    "commanders": 0,
+    "chargers": 0,
+    "broncos": 0,
+    "bills": 0,
+    "buccaneers": 0,
+    "vikings": 0,
+    "lions": 0,
+    "chiefs": 0,
+    "ravens": 0
+  };
 
 const NFC = "rams eagles packers commanders buccaneers vikings lions";
 const AFC = "texans steelers chargers broncos bills chiefs ravens";
@@ -142,13 +142,13 @@ function Scenario() {
         const { data } = await client.models.Team.list();
         let teams_sorted = JSON.parse(JSON.stringify(data));
         teams_sorted = teams_sorted.sort((a:any, b:any) => a.seed-b.seed);
-        let nfc1 = teams_sorted.filter((team) => NFC.includes(team.team_id));
-        let afc1 = teams_sorted.filter((team) => AFC.includes(team.team_id));
+        let nfc1 = teams_sorted.filter((team:any) => NFC.includes(team.team_id));
+        let afc1 = teams_sorted.filter((team:any) => AFC.includes(team.team_id));
 
         setNFC(nfc1);
         setAFC(afc1);
         for(let i:any; i<teams_sorted.length; i++) {
-          scenario_score[teams_sorted[i].team_id] = teams_sorted[i].score;
+          scenario_score[teams_sorted[i].team_id as keyof typeof scenario_score] = teams_sorted[i].score;
         }
         setAllTeams(teams_sorted);
         setEverything(display());
@@ -213,9 +213,10 @@ function Scenario() {
     updateScore('ravens',newValue);
   };
 
-  function updateScore(team,score){
+  function updateScore(team:string,score:any){
     console.log("setting " + team + " score to " + score);
-    scenario_score[team] = parseInt(score);
+    
+    scenario_score[team as keyof typeof scenario_score] = parseInt(score);
     setEverything(display());
     console.log(JSON.stringify(scenario_score));
   }
@@ -242,7 +243,7 @@ function Scenario() {
                 let p:any = JSON.parse(JSON.stringify(pick));
                 p.team = {};
                 p.score = 0;
-                p.score = p.confidence_score * scenario_score[team.team_id];
+                p.score = p.confidence_score * scenario_score[team.team_id as keyof typeof scenario_score];
                 u.score += p.score;
                 p.team = JSON.parse(JSON.stringify(team));
                 u.picks.push(p);
