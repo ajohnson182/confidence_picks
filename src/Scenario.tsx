@@ -122,10 +122,28 @@ function Scenario() {
 
   useEffect(() => {
     async function listTeams() {
+        // let dat = await client.models.Team.list({filter: {
+        //   score: {gt: -1}
+        // }
+        // });
+        // console.log(dat);
         // client.models.Team.update({
         //   team_id: "eagles",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 1
+        //   score: 1,
+        //   dead: false
+        // });
+        // client.models.Team.update({
+        //   team_id: "chiefs",
+        //   contest_id: "nfl_playoff_24-25",
+        //   score: 0,
+        //   dead: false
+        // });
+        // client.models.Team.update({
+        //   team_id: "lions",
+        //   contest_id: "nfl_playoff_24-25",
+        //   score: 0,
+        //   dead: false
         // });
         // client.models.Team.update({
         //   team_id: "chiefs",
@@ -343,7 +361,7 @@ function Scenario() {
             <h4 id="scenariolink">(back to Scoreboard)</h4>
           </Link>
        <button onClick={setToggle}> Toggle Scenario Inputs </button>
-       {toggle && (
+       {toggle && afc.length == 7 && nfc.length == 7 && (
        <Table title="Scenarios">
         <TableHead>
           <TableRow>
@@ -362,10 +380,9 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={afc[0]?.dead}
                         padding={0}
-                        min={scenario_score[afc[0]?.team_id as keyof typeof scenario_score]}
-                        max={3}
+                        max={afc[0]?.dead ? afc[0]?.score : 3}
+                        min={afc[0]?.score}
                         label={afc[0]?.team_id}
                         value={chiefsVal}
                         labelHidden
@@ -383,11 +400,10 @@ function Scenario() {
                     alt="Amplify" width="5vw"/>
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
-                      <StepperField
-                        isDisabled={nfc[0]?.dead}
+                      <StepperField                        
                         padding={0}
-                        min={scenario_score[nfc[0]?.team_id as keyof typeof scenario_score]}
-                        max={3}
+                        max={nfc[0]?.dead ? nfc[0]?.score : 3}
+                        min={nfc[0]?.score}
                         label={nfc[0]?.team_id}
                         value={lionsVal}
                         labelHidden
@@ -408,14 +424,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={afc[1]?.dead}
                         padding={0}
                         label={afc[1]?.team_id}
                         value={billsVal}
                         labelHidden
                         onStepChange={handleBillsOnStepChange}
-                        min={scenario_score[afc[1]?.team_id as keyof typeof scenario_score]}
-                        max={4}
+                        min={afc[1]?.score}
+                        max={afc[1]?.dead ? afc[1]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
@@ -430,14 +445,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={nfc[1]?.dead}
                         padding={0}
                         label={nfc[1]?.team_id}
                         value={eaglesVal}
                         labelHidden
                         onStepChange={handleEaglesOnStepChange}
-                        min={scenario_score[nfc[1]?.team_id as keyof typeof scenario_score]}
-                        max={4}
+                        min={nfc[1]?.score}
+                        max={nfc[1]?.dead ? nfc[1]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
@@ -454,14 +468,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={afc[2]?.dead}
                         padding={0}
                         label={afc[2]?.team_id}
                         value={ravensVal}
                         labelHidden
                         onStepChange={handleRavensOnStepChange}
-                        min={scenario_score[afc[2]?.team_id as keyof typeof scenario_score]}
-                        max={4}
+                        min={afc[2]?.score}
+                        max={afc[2]?.dead ? afc[2]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
@@ -476,14 +489,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={nfc[2]?.dead}
                         padding={0}
                         label={nfc[2]?.team_id}
                         value={buccaneersVal}
                         labelHidden
                         onStepChange={handleBuccaneersOnStepChange}
-                        min={scenario_score[nfc[2]?.team_id as keyof typeof scenario_score]}
-                        max={4}
+                        min={nfc[2]?.score}
+                        max={nfc[2]?.dead ? nfc[2]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
@@ -500,14 +512,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={afc[3]?.dead}
                         padding={0}
                         label={afc[3]?.team_id}
                         value={texansVal}
                         labelHidden
                         onStepChange={handleTexansOnStepChange}
-                        min={scenario_score[afc[3]?.team_id as keyof typeof scenario_score]}
-                        max={4}
+                        min={afc[3]?.score}
+                        max={afc[3]?.dead ? afc[3]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
@@ -522,14 +533,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={nfc[3]?.dead}
                         padding={0}
                         label={nfc[3]?.team_id}
                         value={ramsVal}
                         labelHidden
                         onStepChange={handleRamsOnStepChange}
-                        min={scenario_score[nfc[3]?.team_id as keyof typeof scenario_score]}
-                        max={4}
+                        min={nfc[3]?.score}
+                        max={nfc[3]?.dead ? nfc[3]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
@@ -546,14 +556,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={afc[4]?.dead}
                         padding={0}
                         label={afc[4]?.team_id}
                         value={steelersVal}
                         labelHidden
                         onStepChange={handleSteelersOnStepChange}
-                        min={scenario_score[afc[4]?.team_id as keyof typeof scenario_score]}
-                        max={4}
+                        min={afc[4]?.score}
+                        max={afc[4]?.dead ? afc[4]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
@@ -568,14 +577,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={nfc[4]?.dead}
                         padding={0}
                         label={nfc[4]?.team_id}
                         value={vikingsVal}
                         labelHidden
                         onStepChange={handleVikingsOnStepChange}
-                        min={scenario_score[nfc[4]?.team_id as keyof typeof scenario_score]}
-                        max={4}
+                        min={nfc[4]?.score}
+                        max={nfc[4]?.dead ? nfc[4]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
@@ -592,14 +600,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={afc[5]?.dead}
                         padding={0}
                         label={afc[5]?.team_id}
                         value={chargersVal}
                         labelHidden
                         onStepChange={handleChargersOnStepChange}
-                        min={scenario_score[afc[5]?.team_id as keyof typeof scenario_score]}
-                        max={4}
+                        min={afc[5]?.score}
+                        max={afc[5]?.dead ? afc[5]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
@@ -614,14 +621,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={nfc[5]?.dead}
                         padding={0}
                         label={nfc[5]?.team_id}
                         value={commandersVal}
                         labelHidden
                         onStepChange={handleCommandersOnStepChange}
-                        min={scenario_score[nfc[5]?.team_id as keyof typeof scenario_score]}
-                        max={4}
+                        min={nfc[5]?.score}
+                        max={nfc[5]?.dead ? nfc[5]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
@@ -638,14 +644,13 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={afc[6]?.dead}
                         padding={0}
                         label={afc[6]?.team_id}
                         value={broncosVal}
                         labelHidden
                         onStepChange={handleBroncosOnStepChange}
-                        min={scenario_score[afc[6]?.team_id as keyof typeof scenario_score]}
-                        max={4}
+                        min={afc[6]?.score}
+                        max={afc[6]?.dead ? afc[6]?.score : 4}
                       />
                       </ThemeProvider>
                 </Flex>
@@ -660,13 +665,12 @@ function Scenario() {
                     </div>
                       <ThemeProvider theme={theme} colorMode="light">
                       <StepperField
-                        isDisabled={nfc[6]?.dead}
                         padding={0}
                         label={nfc[6]?.team_id}
                         value={packersVal}
                         labelHidden
                         onStepChange={handlePackersOnStepChange}
-                        min={scenario_score[nfc[6]?.team_id as keyof typeof scenario_score]}
+                        min={nfc[6]?.score}
                         max={4}
                       />
                       </ThemeProvider>
