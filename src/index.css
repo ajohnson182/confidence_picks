@@ -153,6 +153,13 @@ li:hover {
   padding: 0;
 }
 
+.pick-dead {
+  background-color: transparent;
+  border: 1px solid red; 
+  margin: 5px;
+  padding: 0;
+}
+
 .pick-selected {
   background-color: transparent;
   border: 2px solid black; 

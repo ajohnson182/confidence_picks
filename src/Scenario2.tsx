@@ -43,6 +43,22 @@ let scenario_score = {
     "ravens": 0
   };
 
+let lookup = {
+    "texans": false,
+    "steelers": false,
+    "rams": false,
+    "eagles": false,
+    "packers": false,
+    "commanders": false,
+    "chargers": false,
+    "broncos": false,
+    "bills": false,
+    "buccaneers": false,
+    "vikings": false,
+    "lions": false,
+    "chiefs": false,
+    "ravens": false
+  };
 const NFC = "rams eagles packers commanders buccaneers vikings lions";
 const AFC = "texans steelers chargers broncos bills chiefs ravens";
 
@@ -68,7 +84,7 @@ function Scenario2() {
   const [toggle, setToggle] = useToggle(false);
   let { league_id } = useParams();
 
-  const bracketBase = {
+  let bracketBase = {
     afc_round1a: ["chiefs", "texans"],
     afc_round1b: ["bills", "ravens"],
     nfc_round1a: ["lions", "commanders"],
@@ -91,6 +107,8 @@ function Scenario2() {
     finals: ["",""],
     winner: "",
   });
+
+  
   // let nfc = [];
   // let afc = [];
 
@@ -127,31 +145,49 @@ function Scenario2() {
         // client.models.Team.update({
         //   team_id: "rams",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 1,
+        //   score: 2,
         //   dead: false
         // });
         // client.models.Team.update({
-        //   team_id: "vikings",
+        //   team_id: "eagles",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 0,
+        //   score: 1,
         //   dead: true
         // });
         // client.models.Team.update({
+        //   team_id: "lions",
+        //   contest_id: "nfl_playoff_24-25",
+        //   score: 1,
+        //   dead: false
+        // });
+        //  client.models.Team.update({
         //   team_id: "commanders",
         //   contest_id: "nfl_playoff_24-25",
         //   score: 1,
-        //   dead: false
+        //   dead: true
         // });
         // client.models.Team.update({
-        //   team_id: "buccaneers",
+        //   team_id: "bills",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 0,
+        //   score: 1,
         //   dead: true
+        // });
+        // client.models.Team.update({
+        //   team_id: "ravens",
+        //   contest_id: "nfl_playoff_24-25",
+        //   score: 2,
+        //   dead: false
         // });
         // client.models.Team.update({
         //   team_id: "chiefs",
         //   contest_id: "nfl_playoff_24-25",
         //   score: 0,
+        //   dead: true
+        // });
+        // client.models.Team.update({
+        //   team_id: "texans",
+        //   contest_id: "nfl_playoff_24-25",
+        //   score: 2,
         //   dead: false
         // });
         const { data } = await client.models.Team.list();
@@ -159,6 +195,7 @@ function Scenario2() {
         teams_sorted = teams_sorted.sort((a:any, b:any) => a.seed-b.seed);
         let nfc1 = teams_sorted.filter((team:any) => NFC.includes(team.team_id));
         let afc1 = teams_sorted.filter((team:any) => AFC.includes(team.team_id));
+        
         // console.log(nfc);
         // console.log(afc);
         setNFC(nfc1);
@@ -167,10 +204,23 @@ function Scenario2() {
         setEverything(display());
         
         for(let i=0; i<teams_sorted.length; i++) {
-        
+          
           scenario_score[teams_sorted[i].team_id as keyof typeof scenario_score] = teams_sorted[i].score;
           if(teams_sorted[i].team_id == "texans") { 
             updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            if(teams_sorted[i].score >= 2) {
+              bracketBase.afc_semifinals[0] = "texans";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score >= 3) {
+              bracketBase.finals[0] = "texans";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score == 4) {
+              bracketBase.winner = "texans";
+              setBracket(bracketBase);
+            }
+
             // setTexansVal(teams_sorted[i].score);
           }
           if(teams_sorted[i].team_id == "steelers") { 
@@ -179,10 +229,34 @@ function Scenario2() {
           }
           if(teams_sorted[i].team_id == "rams") { 
             updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            if(teams_sorted[i].score >= 2) {
+              bracketBase.nfc_semifinals[1] = "rams";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score >= 3) {
+              bracketBase.finals[1] = "rams";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score == 4) {
+              bracketBase.winner = "rams";
+              setBracket(bracketBase);
+            }
             // setRamsVal(teams_sorted[i].score);
           }
           if(teams_sorted[i].team_id == "eagles") { 
             updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            if(teams_sorted[i].score >= 2) {
+              bracketBase.nfc_semifinals[1] = "eagles";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score >= 3) {
+              bracketBase.finals[1] = "eagles";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score == 4) {
+              bracketBase.winner = "eagles";
+              setBracket(bracketBase);
+            }
             // setEaglesVal(teams_sorted[i].score);
           }
           if(teams_sorted[i].team_id == "packers") { 
@@ -191,6 +265,19 @@ function Scenario2() {
           }
           if(teams_sorted[i].team_id == "commanders") { 
             updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            if(teams_sorted[i].score >= 2) {
+              bracketBase.nfc_semifinals[0] = "commanders";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score >= 3) {
+              bracketBase.finals[1] = "commanders";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score == 4) {
+              bracketBase.winner = "commanders";
+              setBracket(bracketBase);
+            }
+
             // setCommandersVal(teams_sorted[i].score);
           }
           if(teams_sorted[i].team_id == "chargers") { 
@@ -203,6 +290,18 @@ function Scenario2() {
           }
           if(teams_sorted[i].team_id == "bills") { 
             updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            if(teams_sorted[i].score >= 2) {
+              bracketBase.afc_semifinals[1] = "bills";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score >= 3) {
+              bracketBase.finals[0] = "bills";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score == 4) {
+              bracketBase.winner = "bills";
+              setBracket(bracketBase);
+            }
             // setBillsVal(teams_sorted[i].score);
           }
           if(teams_sorted[i].team_id == "buccaneers") { 
@@ -215,17 +314,53 @@ function Scenario2() {
           }
           if(teams_sorted[i].team_id == "lions") { 
             updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            if(teams_sorted[i].score >= 1) {
+              bracketBase.nfc_semifinals[0] = "lions";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score >= 2) {
+              bracketBase.finals[1] = "lions";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score == 3) {
+              bracketBase.winner = "lions";
+              setBracket(bracketBase);
+            }
+
             // setLionsVal(teams_sorted[i].score);
           }
           if(teams_sorted[i].team_id == "chiefs") { 
             updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            if(teams_sorted[i].score >= 1) {
+              bracketBase.afc_semifinals[0] = "chiefs";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score >= 2) {
+              bracketBase.finals[0] = "chiefs";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score == 3) {
+              bracketBase.winner = "chiefs";
+              setBracket(bracketBase);
+            }
             // setChiefsVal(teams_sorted[i].score);
           }
           if(teams_sorted[i].team_id == "ravens") { 
             updateScore(teams_sorted[i].team_id, teams_sorted[i].score);
+            if(teams_sorted[i].score >= 2) {
+              bracketBase.afc_semifinals[1] = "ravens";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score >= 3) {
+              bracketBase.finals[0] = "ravens";
+              setBracket(bracketBase);
+            }
+            if(teams_sorted[i].score == 4) {
+              bracketBase.winner = "ravens";
+              setBracket(bracketBase);
+            }
             // setRavensVal(teams_sorted[i].score);
           }
-          
         }
     }
     listTeams();
@@ -254,7 +389,7 @@ function Scenario2() {
             // console.log(" 2." + user.user_id + " -> " + pick.team_id);
             for(let c=0; c < allTeams.length; c++ ) {
               let team:any = JSON.parse(JSON.stringify(allTeams[c]));
-
+              lookup[team.team_id as keyof typeof lookup] = team.dead;
               // console.log(" 3." + team.team_id);
               if(team.team_id == pick.team_id) {
 
@@ -390,6 +525,7 @@ function Scenario2() {
     return (
       <div key={round + "-" + team1 + "-" + team2} className="matchup">
         <button className={
+          lookup[team1 as keyof typeof lookup] ? "pick-dead" : 
           team1 == "" ? "pick" :
           round.includes("round1") 
             && ( bracket.nfc_semifinals[0] == team1 ||  bracket.nfc_semifinals[1] == team1 
@@ -406,6 +542,7 @@ function Scenario2() {
         </button>
         <span>vs</span>
         <button className={
+          lookup[team2 as keyof typeof lookup] ? "pick-dead" : 
           team2 == "" ? "pick" :
           round.includes("round1") 
             && ( bracket.nfc_semifinals[0] == team2 ||  bracket.nfc_semifinals[1] == team2 
@@ -516,7 +653,7 @@ function Scenario2() {
         alignContent="flex-start"
         wrap="wrap"
         gap="xs"
-        key="mainFlexWrap"
+        key="mainFlexWrap2"
       >
       
       {ranks.map((p:any) => (
