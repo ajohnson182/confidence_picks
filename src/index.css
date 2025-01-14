@@ -134,13 +134,20 @@ li:hover {
 }
 
 .cntr {
-    margin: auto;
-    width: 50%;
-    padding: 10px;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
 }
 
 .cntr-img {
-    margin: auto;
-    width: 50%;
-    padding: 0px;
+  margin: auto;
+  width: 50%;
+  padding: 0px;
+}
+
+.pick {
+  background-color: transparent;
+  border: 1px solid black; 
+  margin: 5px;
+  padding: 0;
 }
