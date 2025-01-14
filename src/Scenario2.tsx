@@ -143,22 +143,28 @@ function Scenario2() {
         // });
         // console.log(dat);
         // client.models.Team.update({
-        //   team_id: "eagles",
+        //   team_id: "rams",
         //   contest_id: "nfl_playoff_24-25",
         //   score: 1,
         //   dead: false
         // });
         // client.models.Team.update({
-        //   team_id: "chiefs",
+        //   team_id: "vikings",
         //   contest_id: "nfl_playoff_24-25",
         //   score: 0,
+        //   dead: true
+        // });
+        // client.models.Team.update({
+        //   team_id: "commanders",
+        //   contest_id: "nfl_playoff_24-25",
+        //   score: 1,
         //   dead: false
         // });
         // client.models.Team.update({
-        //   team_id: "lions",
+        //   team_id: "buccaneers",
         //   contest_id: "nfl_playoff_24-25",
         //   score: 0,
-        //   dead: false
+        //   dead: true
         // });
         // client.models.Team.update({
         //   team_id: "chiefs",
@@ -171,8 +177,8 @@ function Scenario2() {
         teams_sorted = teams_sorted.sort((a:any, b:any) => a.seed-b.seed);
         let nfc1 = teams_sorted.filter((team:any) => NFC.includes(team.team_id));
         let afc1 = teams_sorted.filter((team:any) => AFC.includes(team.team_id));
-        console.log(nfc);
-        console.log(afc);
+        // console.log(nfc);
+        // console.log(afc);
         setNFC(nfc1);
         setAFC(afc1);
         setAllTeams(teams_sorted);
@@ -365,6 +371,7 @@ function Scenario2() {
     "packers":"https://static.www.nfl.com/image/private/f_auto/league/gppfvr7n8gljgjaqux2x"
   };
 
+// this scenario is not deducting points when changes are made, its needs to recalc everything when something changes
   const handleSelection = (round:any, selectedTeam:any) => {
     const newBracket = { ...bracket };
     // newBracket[round][index] = selectedTeam;
@@ -373,69 +380,37 @@ function Scenario2() {
       newBracket["afc_semifinals"][0] = selectedTeam;
       newBracket["finals"][0] = "";
       newBracket["winner"] = "";
-      if(selectedTeam === "chiefs" || selectedTeam === "lions") {
-        updateScore(selectedTeam, 1)
-      } else {
-        updateScore(selectedTeam, 2)
-      }
     }
     else if (round === "afc_round1b" ) {
       newBracket["afc_semifinals"][1] = selectedTeam;
       newBracket["finals"][0] = "";
       newBracket["winner"] = "";
-      if(selectedTeam === "chiefs" || selectedTeam === "lions") {
-        updateScore(selectedTeam, 1)
-      } else {
-        updateScore(selectedTeam, 2)
-      }
     }
     else if (round === "nfc_round1a" ) {
       newBracket["nfc_semifinals"][0] = selectedTeam;
       newBracket["finals"][1] = "";
       newBracket["winner"] = "";
-      if(selectedTeam === "chiefs" || selectedTeam === "lions") {
-        updateScore(selectedTeam, 1)
-      } else {
-        updateScore(selectedTeam, 2)
-      }
     } 
     else if (round === "nfc_round1b" ) {
       newBracket["nfc_semifinals"][1] = selectedTeam;
       newBracket["finals"][1] = "";
       newBracket["winner"] = "";
-      if(selectedTeam === "chiefs" || selectedTeam === "lions") {
-        updateScore(selectedTeam, 1)
-      } else {
-        updateScore(selectedTeam, 2)
-      }
     } 
     else if (round === "afc_semifinals") {
       newBracket["finals"][0] = selectedTeam;
       newBracket["winner"] = "";
-      if(selectedTeam === "chiefs" || selectedTeam === "lions") {
-        updateScore(selectedTeam, 2)
-      } else {
-        updateScore(selectedTeam, 3)
-      }
     } 
     else if (round === "nfc_semifinals") {
       newBracket["finals"][1] = selectedTeam;
       newBracket["winner"] = "";
-      if(selectedTeam === "chiefs" || selectedTeam === "lions") {
-        updateScore(selectedTeam, 2)
-      } else {
-        updateScore(selectedTeam, 3)
-      }
     }
     else if (round === "finals") {
       newBracket["winner"] = selectedTeam;
-      if(selectedTeam === "chiefs" || selectedTeam === "lions") {
-        updateScore(selectedTeam, 3)
-      } else {
-        updateScore(selectedTeam, 4)
-      }
     }
 
+    for(let i:any=0; i<allTeams.length; i++) {
+      updateScore(allTeams[i].team_id, allTeams[i].score)
+    }
     for(let i:any=0; i<newBracket.afc_semifinals.length; i++){
       if(newBracket.afc_semifinals[i] === "chiefs" || newBracket.afc_semifinals[i] === "lions") {
         updateScore(newBracket.afc_semifinals[i], 1)
@@ -468,13 +443,13 @@ function Scenario2() {
   const renderMatchup = (team1:any, team2:any, round:any) => {
     return (
       <div key={round + "-" + team1 + "-" + team2} className="matchup">
-        <button className="pick" key={team1 + "-" + round} onClick={() => handleSelection(round, team1)}>
+        <button className="pick" key={team1 + "-" + round + "-t1"} onClick={() => handleSelection(round, team1)}>
         <img src={imgs[team1 as keyof typeof imgs] ? imgs[team1 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"} width="30px"/>
         {/*{team1}*/}
         {/*{scenario_score[team1]}*/}
         </button>
         <span>vs</span>
-        <button className="pick" key={team2 + "-" + round} onClick={() => handleSelection(round, team2)}>
+        <button className="pick" key={team2 + "-" + round + "-t2"} onClick={() => handleSelection(round, team2)}>
         <img src={imgs[team2 as keyof typeof imgs] ? imgs[team2 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"} width="30px"/>
         {/*{team2}*/}
         {/*{scenario_score[team2]}*/}
@@ -570,13 +545,13 @@ function Scenario2() {
         </Flex>
       ))}
 
-      {everything.map((pick:any) => (
-        <Flex direction="column" gap="0">       
-            <div id="border-bottom">
-              <Flex alignItems="flex-end">
-                <Flex alignItems="baseline" direction="row" gap="20">       
-                  <Text fontWeight="bold"> <span id="score">{pick.score}</span></Text>
-                  <Text fontWeight="semibold"> {league_id ? pick.user_id : pick.user_id + ' (' + pick.picks[0].league_id.toUpperCase() + ')'}</Text>    
+      {everything.map((pick:any, index:any) => (
+        <Flex direction="column" gap="0" key={"flex1-"+index}>       
+            <div id="border-bottom" key={"div-"+index}>
+              <Flex alignItems="flex-end" key={"flex2-"+index}>
+                <Flex alignItems="baseline" direction="row" gap="20" key={"flex3-"+index}>       
+                  <Text fontWeight="bold" key={"text1-"+index}> <span id="score">{pick.score}</span></Text>
+                  <Text fontWeight="semibold" key={"text2-"+index}> {league_id ? pick.user_id : pick.user_id + ' (' + pick.picks[0].league_id.toUpperCase() + ')'}</Text>    
                   
                   
                 </Flex>
@@ -591,11 +566,12 @@ function Scenario2() {
             alignContent="flex-start"
             wrap="wrap"
             gap="xs"
+            key={"flex-user-wrap-"+index}
           >
             {pick.picks.map((p:any) => (
                <Flex width="5vw" key={p.team_id + pick.user_id} opacity={p.team.dead ? "0.2" : 1}>
                   <Image src={p.team.logo_ref}
-                    alt="Amplify" width="100%" />
+                    alt="Amplify" width="100%" key={"img1-"+index}/>
               </Flex>
             ))}
           </Flex> 

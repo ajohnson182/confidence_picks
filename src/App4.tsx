@@ -15,10 +15,10 @@ function App4() {
         <Route path="/ava" element={<App3 />} />
         <Route path="/cnutfxc" element={<App3 />} />
         <Route path="/league/:league_id" element={<App3 />} />
-        <Route path="/scenario" element={<Scenario />} />
-        <Route path="/scenario/:league_id" element={<Scenario />} />
-        <Route path="/scenario2" element={<Scenario2 />} />
-        <Route path="/scenario2/:league_id" element={<Scenario2 />} />
+        <Route path="/scenario" element={<Scenario2 />} />
+        <Route path="/scenario/:league_id" element={<Scenario2 />} />
+        <Route path="/scenario-legacy" element={<Scenario />} />
+        <Route path="/scenario-legacy/:league_id" element={<Scenario />} />
         {/*<Route path="/bracket" element={<Bracket />} />*/}
       </Routes>
     </Router>
