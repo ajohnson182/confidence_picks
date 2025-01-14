@@ -443,14 +443,34 @@ function Scenario2() {
   const renderMatchup = (team1:any, team2:any, round:any) => {
     return (
       <div key={round + "-" + team1 + "-" + team2} className="matchup">
-        <button className="pick" key={team1 + "-" + round + "-t1"} onClick={() => handleSelection(round, team1)}>
-        <img src={imgs[team1 as keyof typeof imgs] ? imgs[team1 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"} width="30px"/>
+        <button className={
+          team1 == "" ? "pick" :
+          round.includes("round1") 
+            && ( bracket.nfc_semifinals[0] == team1 ||  bracket.nfc_semifinals[1] == team1 
+              ||bracket.afc_semifinals[0] == team1 ||  bracket.afc_semifinals[1] == team1 ) ? "pick pick-selected" 
+            : round.includes("semifinals") && ( bracket.finals[0] == team1 || bracket.finals[1] == team1 ) ? "pick pick-selected" 
+            : round.includes("finals") && ( bracket.winner == team1) ? "pick pick-selected" : "pick"} 
+            key={team1 + "-" + round + "-t1"} 
+            onClick={() => handleSelection(round, team1)}>
+        <img 
+          className={imgs[team1 as keyof typeof imgs] ? "pick-img" : "question-mark"} 
+          src={imgs[team1 as keyof typeof imgs] ? imgs[team1 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"} width="30px"/>
         {/*{team1}*/}
         {/*{scenario_score[team1]}*/}
         </button>
         <span>vs</span>
-        <button className="pick" key={team2 + "-" + round + "-t2"} onClick={() => handleSelection(round, team2)}>
-        <img src={imgs[team2 as keyof typeof imgs] ? imgs[team2 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"} width="30px"/>
+        <button className={
+          team2 == "" ? "pick" :
+          round.includes("round1") 
+            && ( bracket.nfc_semifinals[0] == team2 ||  bracket.nfc_semifinals[1] == team2 
+              ||bracket.afc_semifinals[0] == team2 ||  bracket.afc_semifinals[1] == team2 ) ? "pick pick-selected" 
+            : round.includes("semifinals") && ( bracket.finals[0] == team2 || bracket.finals[1] == team2 ) ? "pick pick-selected" 
+            : round.includes("finals") && ( bracket.winner == team2) ? "pick pick-selected" : "pick"} 
+              key={team2 + "-" + round + "-t2"} 
+              onClick={() => handleSelection(round, team2)}>
+        <img 
+          className={imgs[team2 as keyof typeof imgs] ? "pick-img" : "question-mark"} 
+          src={imgs[team2 as keyof typeof imgs] ? imgs[team2 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"} width="30px"/>
         {/*{team2}*/}
         {/*{scenario_score[team2]}*/}
         </button>
@@ -461,7 +481,7 @@ function Scenario2() {
     return (
       <div key={round + "-" + team1} className="matchup">
         <button className="pick" key={team1 + "-" + round}>
-        <img src={imgs[team1 as keyof typeof imgs] ? imgs[team1 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"} width="30px"/>
+        <img className={imgs[team1 as keyof typeof imgs] ? "pick-img" : "question-mark"} src={imgs[team1 as keyof typeof imgs] ? imgs[team1 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"} width="30px"/>
         {/*{team1}*/}
         {/*{scenario_score[team1]}*/}
         </button>

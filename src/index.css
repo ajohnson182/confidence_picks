@@ -147,7 +147,20 @@ li:hover {
 
 .pick {
   background-color: transparent;
-  border: 1px solid black; 
+  border: 1px dotted black; 
   margin: 5px;
   padding: 0;
+}
+
+.pick-selected {
+  background-color: transparent;
+  border: 2px solid black; 
+  margin: 5px;
+  padding: 0;
+}
+
+.question-mark {
+  opacity: 0.5;
+  padding-top:5px;
+  height: 30px;
 }
