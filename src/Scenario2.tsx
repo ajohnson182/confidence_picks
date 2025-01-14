@@ -45,21 +45,6 @@ let scenario_score = {
 
 const NFC = "rams eagles packers commanders buccaneers vikings lions";
 const AFC = "texans steelers chargers broncos bills chiefs ravens";
-  
-// const theme = {
-//   name: 'stepper-theme',
-//   tokens: {
-//     components: {
-//       stepperfield: {
-//         input: {
-//           fontSize: { value: '10px' },
-//         },
-//       },
-//     },
-//   },
-// };
-
-
 
 function Scenario2() {
 
@@ -69,21 +54,6 @@ function Scenario2() {
   const [allTeams, setAllTeams] = useState<any | null>([]);
   const [nfc, setNFC] = useState<any | null>([]);
   const [afc, setAFC] = useState<any | null>([]);
-
-  // const [texansVal, setTexansVal] = React.useState<number>(0);
-  // const [steelersVal, setSteelersVal] = React.useState<number>(0);
-  // const [ramsVal, setRamsVal] = React.useState<number>(0);
-  // const [eaglesVal, setEaglesVal] = React.useState<number>(0);
-  // const [packersVal, setPackersVal] = React.useState<number>(0);
-  // const [commandersVal, setCommandersVal] = React.useState<number>(0);
-  // const [chargersVal, setChargersVal] = React.useState<number>(0);
-  // const [broncosVal, setBroncosVal] = React.useState<number>(0);
-  // const [billsVal, setBillsVal] = React.useState<number>(0);
-  // const [buccaneersVal, setBuccaneersVal] = React.useState<number>(0);
-  // const [vikingsVal, setVikingsVal] = React.useState<number>(0);
-  // const [lionsVal, setLionsVal] = React.useState<number>(0);
-  // const [chiefsVal, setChiefsVal] = React.useState<number>(0);
-  // const [ravensVal, setRavensVal] = React.useState<number>(0);
 
   const [everything, setEverything] = useState<any | null>([]);
   const ranks = [14,13,12,11,10,9,8,7,6,5,4,3,2,1];
@@ -95,8 +65,20 @@ function Scenario2() {
     return [toggleValue, toggler]
   };
 
-  const [toggle, setToggle] = useToggle(true);
+  const [toggle, setToggle] = useToggle(false);
   let { league_id } = useParams();
+
+  const bracketBase = {
+    afc_round1a: ["chiefs", "texans"],
+    afc_round1b: ["bills", "ravens"],
+    nfc_round1a: ["lions", "commanders"],
+    nfc_round1b: ["eagles", "rams"],
+   // round2: ["", "", "", ""],
+    afc_semifinals: ["", ""],
+    nfc_semifinals: ["", ""],
+    finals: ["",""],
+    winner: "",
+  };
 
   const [bracket, setBracket] = useState({
     afc_round1a: ["chiefs", "texans"],
@@ -249,63 +231,6 @@ function Scenario2() {
     listTeams();
   }, [allUsers,allPicks]); 
 
-  // const handleTexansOnStepChange = (newValue: number) => {
-  //   setTexansVal(newValue);
-  //   updateScore('texans',newValue);
-  // };
-  // const handleSteelersOnStepChange = (newValue: number) => {
-  //   setSteelersVal(newValue);
-  //   updateScore('steelers',newValue);
-  // };
-  // const handleRamsOnStepChange = (newValue: number) => {
-  //   setRamsVal(newValue);
-  //   updateScore('rams',newValue);
-  // };
-  // const handleEaglesOnStepChange = (newValue: number) => {
-  //   setEaglesVal(newValue);
-  //   updateScore('eagles',newValue);
-  // };
-  // const handlePackersOnStepChange = (newValue: number) => {
-  //   setPackersVal(newValue);
-  //   updateScore('packers',newValue);
-  // };
-  // const handleCommandersOnStepChange = (newValue: number) => {
-  //   setCommandersVal(newValue);
-  //   updateScore('commanders',newValue);
-  // };
-  // const handleChargersOnStepChange = (newValue: number) => {
-  //   setChargersVal(newValue);
-  //   updateScore('chargers',newValue);
-  // };
-  // const handleBroncosOnStepChange = (newValue: number) => {
-  //   setBroncosVal(newValue);
-  //   updateScore('broncos',newValue);
-  // };
-  // const handleBillsOnStepChange = (newValue: number) => {
-  //   setBillsVal(newValue);
-  //   updateScore('bills',newValue);
-  // };
-  // const handleBuccaneersOnStepChange = (newValue: number) => {
-  //   setBuccaneersVal(newValue);
-  //   updateScore('buccaneers',newValue);
-  // };
-  // const handleVikingsOnStepChange = (newValue: number) => {
-  //   setVikingsVal(newValue);
-  //   updateScore('vikings',newValue);
-  // };
-  // const handleLionsOnStepChange = (newValue: number) => {
-  //   setLionsVal(newValue);
-  //   updateScore('lions',newValue);
-  // };
-  // const handleChiefsOnStepChange = (newValue: number) => {
-  //   setChiefsVal(newValue);
-  //   updateScore('chiefs',newValue);
-  // };
-  // const handleRavensOnStepChange = (newValue: number) => {
-  //   setRavensVal(newValue);
-  //   updateScore('ravens',newValue);
-  // };
-
   function updateScore(team:string,score:any){
     // console.log("setting " + team + " score to " + score);
     
@@ -371,6 +296,25 @@ function Scenario2() {
     "packers":"https://static.www.nfl.com/image/private/f_auto/league/gppfvr7n8gljgjaqux2x"
   };
 
+  function resetScores() {
+    for(let i:any=0; i<allTeams.length; i++) {
+      updateScore(allTeams[i].team_id, allTeams[i].score);
+    }
+  }
+  function resetBracket() {
+    setBracket({
+        afc_round1a: ["chiefs", "texans"],
+        afc_round1b: ["bills", "ravens"],
+        nfc_round1a: ["lions", "commanders"],
+        nfc_round1b: ["eagles", "rams"],
+        afc_semifinals: ["", ""],
+        nfc_semifinals: ["", ""],
+        finals: ["",""],
+        winner: "",
+    });
+    resetScores();
+  }
+
 // this scenario is not deducting points when changes are made, its needs to recalc everything when something changes
   const handleSelection = (round:any, selectedTeam:any) => {
     const newBracket = { ...bracket };
@@ -408,9 +352,11 @@ function Scenario2() {
       newBracket["winner"] = selectedTeam;
     }
 
-    for(let i:any=0; i<allTeams.length; i++) {
-      updateScore(allTeams[i].team_id, allTeams[i].score)
-    }
+    resetScores();
+    // for(let i:any=0; i<allTeams.length; i++) {
+    //   updateScore(allTeams[i].team_id, allTeams[i].score)
+    // }
+
     for(let i:any=0; i<newBracket.afc_semifinals.length; i++){
       if(newBracket.afc_semifinals[i] === "chiefs" || newBracket.afc_semifinals[i] === "lions") {
         updateScore(newBracket.afc_semifinals[i], 1)
@@ -454,7 +400,7 @@ function Scenario2() {
             onClick={() => handleSelection(round, team1)}>
         <img 
           className={imgs[team1 as keyof typeof imgs] ? "pick-img" : "question-mark"} 
-          src={imgs[team1 as keyof typeof imgs] ? imgs[team1 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"} width="30px"/>
+          src={imgs[team1 as keyof typeof imgs] ? imgs[team1 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"}/>
         {/*{team1}*/}
         {/*{scenario_score[team1]}*/}
         </button>
@@ -470,7 +416,7 @@ function Scenario2() {
               onClick={() => handleSelection(round, team2)}>
         <img 
           className={imgs[team2 as keyof typeof imgs] ? "pick-img" : "question-mark"} 
-          src={imgs[team2 as keyof typeof imgs] ? imgs[team2 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"} width="30px"/>
+          src={imgs[team2 as keyof typeof imgs] ? imgs[team2 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"}/>
         {/*{team2}*/}
         {/*{scenario_score[team2]}*/}
         </button>
@@ -481,7 +427,7 @@ function Scenario2() {
     return (
       <div key={round + "-" + team1} className="matchup">
         <button className={imgs[team1 as keyof typeof imgs] ? "pick pick-selected" : "pick"} key={team1 + "-" + round}>
-        <img className={imgs[team1 as keyof typeof imgs] ? "pick-img" : "question-mark"} src={imgs[team1 as keyof typeof imgs] ? imgs[team1 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"} width="30px"/>
+        <img className={imgs[team1 as keyof typeof imgs] ? "pick-img" : "question-mark"} src={imgs[team1 as keyof typeof imgs] ? imgs[team1 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"}/>
         {/*{team1}*/}
         {/*{scenario_score[team1]}*/}
         </button>
@@ -500,27 +446,30 @@ function Scenario2() {
             wrap="wrap"
             gap="xs"
           >
-          <Link to="/scenario/ava">
-            <button> AVA </button>
+          <Link to="/league/ava">
+            <button className={league_id == "ava" ? "selected-league" : "non-selected-league"}> AVA </button>
           </Link>
-          <Link to="/scenario/cnutfxc">
-            <button> CNU TFXC </button>
+          <Link to="/league/cnutfxc">
+            <button className={league_id == "cnutfxc" ? "selected-league" : "non-selected-league"}> CNU TFXC </button>
           </Link>
-          <Link to="/scenario">
-            <button> ALL ENTRIES </button>
+          <Link to="/">
+            <button className={league_id ? "non-selected-league" : "selected-league"}> ALL ENTRIES </button>
           </Link>
          
       </Flex>
-         <h1 id="pagetitle-scenario"> Scenario Builder </h1> 
-         <h2 id="pageleague"> {league_id?.toUpperCase()} </h2>
-         <Link to={league_id ? "/league/" + league_id : "/"}>
+         
+         {/*<h2 id="pageleague"> {league_id ? league_id?.toUpperCase() : "ALL ENTRIES"} </h2>*/}
+         {/*<Link to={league_id ? "/league/" + league_id : "/"}>
             <h4 id="scenariolink">(back to Scoreboard)</h4>
-          </Link>
-       <button onClick={setToggle}> Toggle Scenario Inputs </button>
+          </Link>*/}
+       {toggle && (<button onClick={setToggle}> Hide Scenarios </button>)}
+       {!toggle && (<button className="non-selected-league" onClick={setToggle}> Show Scenarios </button>)}
+
        {toggle && afc.length == 7 && nfc.length == 7 && (
        <div className="App">
-      <div key="r1" className="round">
-        <div>Divisional</div>
+       <div id="pagetitle-scenario"> Scenario Builder </div> 
+       <div key="r1" className="round">
+       <div className="scenario-round">Divisional Round</div>
           {renderMatchup(bracket.afc_round1a[0], bracket.afc_round1a[1], "afc_round1a")}
           {renderMatchup(bracket.afc_round1b[0], bracket.afc_round1b[1], "afc_round1b")}
           {renderMatchup(bracket.nfc_round1a[0], bracket.nfc_round1a[1], "nfc_round1a")}
@@ -529,26 +478,37 @@ function Scenario2() {
       </div>
 
       <div key="r2"  className="round">
-        <div>Conference</div>
+        <div className="scenario-round">Conference Championships</div>
           {renderMatchup(bracket.afc_semifinals[0], bracket.afc_semifinals[1], "afc_semifinals")}
           {renderMatchup(bracket.nfc_semifinals[0], bracket.nfc_semifinals[1], "nfc_semifinals")}
       </div>
 
       <div key="r3"  className="round">
-        <div>Super Bowl</div>
+        <div className="scenario-round">Super Bowl</div>
           {renderMatchup(bracket.finals[0], bracket.finals[1], "finals")}
       </div>
 
       <div key="r4"  className="winner">
-        <div>Champion</div>
+        <div className="scenario-round">Champion</div>
         {renderWinner(bracket.winner, "finals")}
       </div>
+      <button className={JSON.stringify(bracketBase) === JSON.stringify(bracket) ? "selected-league" : "non-selected-league" } onClick={resetBracket}> Reset Scenario </button> 
     </div>
        
        
       )}
       </div>
-
+      <Flex
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        alignContent="flex-start"
+        wrap="wrap"
+        gap="xs"
+        key="mainFlexWrap"
+      >
+       <h2 id="pageleague"> {league_id ? league_id?.toUpperCase() : "All Entries"} Scoreboard </h2> 
+       </Flex>
        <Flex
         direction="row"
         justifyContent="center"
@@ -558,7 +518,7 @@ function Scenario2() {
         gap="xs"
         key="mainFlexWrap"
       >
-
+      
       {ranks.map((p:any) => (
          <Flex width="5vw" justifyContent="center" alignItems="center" key={"header-"+p}>
             <Text text-align="center">{p}</Text>

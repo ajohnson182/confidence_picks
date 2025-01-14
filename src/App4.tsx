@@ -11,10 +11,13 @@ function App4() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<App3 />} />
-        <Route path="/ava" element={<App3 />} />
-        <Route path="/cnutfxc" element={<App3 />} />
-        <Route path="/league/:league_id" element={<App3 />} />
+        <Route path="/" element={<Scenario2 />} />
+        <Route path="/ava" element={<Scenario2 />} />
+        <Route path="/cnutfxc" element={<Scenario2 />} />
+        <Route path="/legacy" element={<App3 />} />
+        <Route path="/legacy/ava" element={<App3 />} />
+        <Route path="/legacy/cnutfxc" element={<App3 />} />
+        <Route path="/league/:league_id" element={<Scenario2 />} />
         <Route path="/scenario" element={<Scenario2 />} />
         <Route path="/scenario/:league_id" element={<Scenario2 />} />
         <Route path="/scenario-legacy" element={<Scenario />} />
