@@ -145,50 +145,50 @@ function Scenario2() {
         // client.models.Team.update({
         //   team_id: "rams",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 2,
-        //   dead: false
+        //   score: 1,
+        //   dead: true
         // });
         // client.models.Team.update({
         //   team_id: "eagles",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 1,
-        //   dead: true
+        //   score: 2,
+        //   dead: false
         // });
         // client.models.Team.update({
         //   team_id: "lions",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 1,
-        //   dead: false
+        //   score: 0,
+        //   dead: true
         // });
         //  client.models.Team.update({
         //   team_id: "commanders",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 1,
-        //   dead: true
+        //   score: 2,
+        //   dead: false
         // });
         // client.models.Team.update({
         //   team_id: "bills",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 1,
-        //   dead: true
+        //   score: 2,
+        //   dead: false
         // });
         // client.models.Team.update({
         //   team_id: "ravens",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 2,
-        //   dead: false
+        //   score: 1,
+        //   dead: true
         // });
         // client.models.Team.update({
         //   team_id: "chiefs",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 0,
-        //   dead: true
+        //   score: 1,
+        //   dead: false
         // });
         // client.models.Team.update({
         //   team_id: "texans",
         //   contest_id: "nfl_playoff_24-25",
-        //   score: 2,
-        //   dead: false
+        //   score: 1,
+        //   dead: true
         // });
         const { data } = await client.models.Team.list();
         let teams_sorted = JSON.parse(JSON.stringify(data));
@@ -605,14 +605,16 @@ function Scenario2() {
        {toggle && afc.length == 7 && nfc.length == 7 && (
        <div className="App">
        <div id="pagetitle-scenario"> Scenario Builder </div> 
-       <div key="r1" className="round">
-       <div className="scenario-round">Divisional Round</div>
-          {renderMatchup(bracket.afc_round1a[0], bracket.afc_round1a[1], "afc_round1a")}
-          {renderMatchup(bracket.afc_round1b[0], bracket.afc_round1b[1], "afc_round1b")}
-          {renderMatchup(bracket.nfc_round1a[0], bracket.nfc_round1a[1], "nfc_round1a")}
-          {renderMatchup(bracket.nfc_round1b[0], bracket.nfc_round1b[1], "nfc_round1b")}
-          
-      </div>
+       {!toggle  && (
+        <div key="r1" className="round">
+       
+          <div className="scenario-round">Divisional Round</div>
+            {renderMatchup(bracket.afc_round1a[0], bracket.afc_round1a[1], "afc_round1a")}
+            {renderMatchup(bracket.afc_round1b[0], bracket.afc_round1b[1], "afc_round1b")}
+            {renderMatchup(bracket.nfc_round1a[0], bracket.nfc_round1a[1], "nfc_round1a")}
+            {renderMatchup(bracket.nfc_round1b[0], bracket.nfc_round1b[1], "nfc_round1b")}
+          </div>
+       )}
 
       <div key="r2"  className="round">
         <div className="scenario-round">Conference Championships</div>
