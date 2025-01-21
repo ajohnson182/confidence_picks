@@ -564,7 +564,7 @@ function Scenario2() {
     return (
       <div key={round + "-" + team1} className="matchup">
         <button className={imgs[team1 as keyof typeof imgs] ? "pick pick-selected" : "pick"} key={team1 + "-" + round}>
-        <img className={imgs[team1 as keyof typeof imgs] ? "pick-img" : "question-mark"} src={imgs[team1 as keyof typeof imgs] ? imgs[team1 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"}/>
+        <img className="super-bowl-winner" src={imgs[team1 as keyof typeof imgs] ? imgs[team1 as keyof typeof imgs] : "https://upload.wikimedia.org/wikipedia/commons/5/5a/Black_question_mark.png"}/>
         {/*{team1}*/}
         {/*{scenario_score[team1]}*/}
         </button>
